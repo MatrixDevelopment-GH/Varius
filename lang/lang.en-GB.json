@@ -178,7 +178,7 @@
     },
     "refs": {
         "meta": {
-            "translators": "[TranslatorName#1234](https://github.com/)"
+            "translators": "[elbertainstein#1234](https://github.com/)"
         },
         "bot": {
             "description": "Varius gives a server fun and economical features."

@@ -25,10 +25,10 @@
     "links": {
         "author": "https://github.com/Elbert-Ainstein",
         "docs": "https://top.gg/",
-        "donate": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EW389DYYSS4FC",
-        "invite": "https://discord.com/",
+        "donate": "https://www.paypal.com/",
+        "invite": "https://discord.com/api/oauth2/authorize?client_id=1119834966965096539&permissions=8&scope=bot",
         "source": "https://github.com/MatrixDevelopment-GH/Varius",
-        "support": "https://support.discord.com/",
+        "support": "https://discord.gg/Vj3QSjwGu5",
         "vote": "https://top.gg/"
     }
 }
