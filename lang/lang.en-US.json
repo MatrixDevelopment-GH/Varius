@@ -120,6 +120,24 @@
                         ]
                     }
                 ]
+            },
+            "bj": {
+                "title": "Blackjack",
+                "description": "Play a game of Blackjack!",
+                "fields": [
+                    {
+                        "name": "Your Hand",
+                        "value": null
+                    },
+                    {
+                        "name": "Dealer's Hand",
+                        "value": null
+                    },
+                    {
+                        "name": "Options",
+                        "value": null
+                    }
+                ]
             }
         },
         "validationEmbeds": {
@@ -186,7 +204,8 @@
         "chatCommands": {
             "help": "help",
             "info": "info",
-            "test": "test"
+            "test": "test",
+            "bj": "bj"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -200,7 +219,8 @@
         "commandDescs": {
             "help": "Find help or contact support.",
             "info": "View bot info.",
-            "test": "Run the test command."
+            "test": "Run the test command.",
+            "bj": "Play a game of Blackjack!"
         },
         "argDescs": {
             "helpOption": "Option.",
