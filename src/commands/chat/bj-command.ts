@@ -10,12 +10,12 @@ import { Lang } from '../../services/index.js';
 import { InteractionUtils } from '../../utils/index.js';
 import { cardRank } from '../../constants/card-rank.js';
 
-//importing json
-
-
 function getRandomCard() {
     const rank = cardRank.ranks[Math.floor(Math.random() * cardRank.ranks.length)];
+    const suit = cardRank.suits[Math.floor(Math.random() * cardRank.suits.length)];
     console.log(rank)
+    console.log(suit)
+    return {rank, suit};
 }
 
 export class BjCommand implements Command {
@@ -25,7 +25,14 @@ export class BjCommand implements Command {
     public requireClientPerms: PermissionsString[] = [];
 
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
-        getRandomCard();
-        await InteractionUtils.send(intr, Lang.getEmbed('displayEmbeds.bj', data.lang));
+        const playerCards = [getRandomCard(), getRandomCard()];
+        const dealerCards = [getRandomCard(), getRandomCard()];
+        let embed = Lang.getEmbed('displayEmbeds.bj', data.lang);
+        embed.addFields(
+            {name: "Your hand", value: `${playerCards.map(card => card.rank + card.suit + " ")}`},
+            {name: "Dealer's hand", value: `${dealerCards.map(card => card.rank + card.suit + " ")}`},
+            {name: "Options", value: "ea"},
+        )
+        await InteractionUtils.send(intr, embed);
     }
 }
