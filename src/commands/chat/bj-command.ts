@@ -13,8 +13,7 @@ import { cardRank } from '../../constants/card-rank.js';
 function getRandomCard() {
     const rank = cardRank.ranks[Math.floor(Math.random() * cardRank.ranks.length)];
     const suit = cardRank.suits[Math.floor(Math.random() * cardRank.suits.length)];
-    console.log(rank)
-    console.log(suit)
+    console.log(rank + suit)
     return {rank, suit};
 }
 
@@ -27,12 +26,10 @@ export class BjCommand implements Command {
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         const playerCards = [getRandomCard(), getRandomCard()];
         const dealerCards = [getRandomCard(), getRandomCard()];
-        let embed = Lang.getEmbed('displayEmbeds.bj', data.lang);
-        embed.addFields(
-            {name: "Your hand", value: `${playerCards.map(card => card.rank + card.suit + " ")}`},
-            {name: "Dealer's hand", value: `${dealerCards.map(card => card.rank + card.suit + " ")}`},
-            {name: "Options", value: "ea"},
-        )
+        let embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
+            BJ_PLAYER_HAND: `${playerCards.map(card => card.rank + card.suit + " ")}`,
+            BJ_DEALER_HAND: `${dealerCards.map(card => card.rank + card.suit + " ")}`,
+        });
         await InteractionUtils.send(intr, embed);
     }
-}
+} 

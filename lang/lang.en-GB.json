@@ -124,7 +124,20 @@
             "bj": {
                 "title": "Blackjack",
                 "description": "Play a game of Blackjack!",
-                "fields": []
+                "fields": [
+                    {
+                        "name": "Your Hand",
+                        "value": "{{BJ_PLAYER_HAND}}"
+                    },
+                    {
+                        "name": "Dealer's Hand",
+                        "value": "{{BJ_DEALER_HAND}}"
+                    },
+                    {
+                        "name": "Options",
+                        "value": "{{BJ_OPTIONS}}"
+                    }
+                ]
             }
         },
         "validationEmbeds": {
