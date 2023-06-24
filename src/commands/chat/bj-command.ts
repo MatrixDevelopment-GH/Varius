@@ -8,6 +8,7 @@ import { Lang } from '../../services/index.js';
 import { InteractionUtils } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
+// TODO: get the card symbols from the enum cards in card-rank.ts
 function getRandomCard(): any {
     const rank = cardRank.ranks[Math.floor(Math.random() * cardRank.ranks.length)];
     const suit = cardRank.suits[Math.floor(Math.random() * cardRank.suits.length)];
