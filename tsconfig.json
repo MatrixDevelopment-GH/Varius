@@ -15,8 +15,6 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": [
-        "assets"
-    ],
+    "include": ["./src/index.d.ts"],
     "exclude": ["dist", "node_modules", "tests"]
 }

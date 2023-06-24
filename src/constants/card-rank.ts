@@ -1,5 +1,5 @@
 export class cardRank {
-    public static readonly suits = ['♠', '♣', '♥', '♦'];
+    public static readonly suits = ['spades', 'clubs', 'hearts', 'diamonds'];
     public static readonly ranks = [
         'A',
         '2',
