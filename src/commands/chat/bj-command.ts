@@ -15,8 +15,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function loadImage(rank: string, suit: string): Promise<Buffer> {
-    const imagePath = join(__dirname, '..', 'assets', 'images', `${rank}_of_${suit}.png`);
-
+    const imagePath = join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        'assets',
+        'images',
+        `${rank}_of_${suit}.png`
+    );
+    console.log(imagePath);
     try {
         const imageData = await fs.readFile(imagePath);
         return imageData;
