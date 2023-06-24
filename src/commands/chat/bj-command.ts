@@ -10,11 +10,14 @@ import { Lang } from '../../services/index.js';
 import { InteractionUtils } from '../../utils/index.js';
 import { cardRank } from '../../constants/card-rank.js';
 
-function getRandomCard() {
+function getRandomCard(): {
+    rank: string;
+    suit: string;
+} {
     const rank = cardRank.ranks[Math.floor(Math.random() * cardRank.ranks.length)];
     const suit = cardRank.suits[Math.floor(Math.random() * cardRank.suits.length)];
-    console.log(rank + suit)
-    return {rank, suit};
+    console.log(rank + suit);
+    return { rank, suit };
 }
 
 export class BjCommand implements Command {
@@ -27,9 +30,9 @@ export class BjCommand implements Command {
         const playerCards = [getRandomCard(), getRandomCard()];
         const dealerCards = [getRandomCard(), getRandomCard()];
         let embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
-            BJ_PLAYER_HAND: `${playerCards.map(card => card.rank + card.suit + " ")}`,
-            BJ_DEALER_HAND: `${dealerCards.map(card => card.rank + card.suit + " ")}`,
+            BJ_PLAYER_HAND: `${playerCards.map(card => card.rank + card.suit + ' ')}`,
+            BJ_DEALER_HAND: `${dealerCards.map(card => card.rank + card.suit + ' ')}`,
         });
         await InteractionUtils.send(intr, embed);
     }
-} 
+}
