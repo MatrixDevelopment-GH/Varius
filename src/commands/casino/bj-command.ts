@@ -53,7 +53,7 @@ export class BjCommand implements Command {
             ${dealerCards.map(i => i.rank + ' of ' + i.suit + ' ')}, ?
             ( current points: ${getVal(dealerCards)}) 
             `,
-        });
+        }).setColor('Random');
 
         const hit = new ButtonBuilder()
             .setCustomId('hit')
