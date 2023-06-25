@@ -13,7 +13,7 @@ export class cardRank {
         '10',
         'Jack',
         'Queen',
-        'K',
+        'King',
     ];
     public static readonly ranksWithJoker = [
         'RJ',
