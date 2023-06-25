@@ -278,6 +278,10 @@
             "ViewCreatorMonetizationAnalytics": "View Server Subscription Insights",
             "ViewGuildInsights": "View Server Insights"
         },
+        "bjOptions": {
+            "hit": "Hit",
+            "stand": "Stand"
+        },
         "helpOptions": {
             "contactSupport": "Contact Support",
             "commands": "Commands"

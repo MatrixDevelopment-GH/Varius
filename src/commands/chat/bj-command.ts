@@ -51,17 +51,17 @@ export class BjCommand implements Command {
             `,
             BJ_DEALER_HAND: `
             ${dealerCards.map(i => i.rank + ' of ' + i.suit + ' ')}, ?
-            ( current points: ${getVal(dealerCards)} ) 
+            ( current points: ${getVal(dealerCards)}) 
             `,
         });
 
         const hit = new ButtonBuilder()
             .setCustomId('hit')
-            .setLabel('Hit')
+            .setLabel(Lang.getRef('bjOptions.hit', Language.Default))
             .setStyle(ButtonStyle.Primary);
         const stand = new ButtonBuilder()
             .setCustomId('stand')
-            .setLabel('Stand')
+            .setLabel(Lang.getRef('bjOptions.stand', Language.Default))
             .setStyle(ButtonStyle.Primary);
         const row: ActionRowBuilder<ButtonBuilder> =
             new ActionRowBuilder<ButtonBuilder>().addComponents(hit, stand);
