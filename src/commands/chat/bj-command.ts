@@ -32,6 +32,8 @@ function getScore(): number {
     return val;
 }
 
+// TODO: Add a way to draw new cards and put em into the player's hands
+// TODO: Add a
 export class BjCommand implements Command {
     public names = [Lang.getRef('chatCommands.bj', Language.Default)];
     public cooldown = new RateLimiter(1, 10000);
