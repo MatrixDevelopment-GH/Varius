@@ -1,15 +1,7 @@
-//TODO: Hook up card ranks & suits with these guys.
-export enum cards {
-    '🂡🂢🂣🂤🂥🂦🂧🂨🂩🂪🂫🂬🂭🂮', // Spades
-    '🂱🂲🂳🂴🂵🂶🂷🂸🂹🂺🂻🂼🂽🂾', // Hearts
-    '🃁🃂🃃🃄🃅🃆🃇🃈🃉🃊🃋🃌🃍🃎', // Diamonds
-    '🃑🃒🃓🃔🃕🃖🃗🃘🃙🃚🃛🃜🃝🃞', // Clubs
-}
-
 export class cardRank {
-    public static readonly suits = ['spades', 'clubs', 'hearts', 'diamonds'];
+    public static readonly suits = ['Spades', 'Clubs', 'Hearts', 'Diamonds'];
     public static readonly ranks = [
-        'A',
+        'Ace',
         '2',
         '3',
         '4',
@@ -19,8 +11,8 @@ export class cardRank {
         '8',
         '9',
         '10',
-        'J',
-        'Q',
+        'Jack',
+        'Queen',
         'K',
     ];
     public static readonly ranksWithJoker = [
