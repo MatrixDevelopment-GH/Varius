@@ -14,6 +14,7 @@
 -   If you want to send stuff in other forms, look in /services
 -   Export the command from /commands/chat/index.ts
 -   Import the command in start-bot.ts, and put a new instance of it inside the start() function
+-   Get the data of the command into metadata.ts
 
 # Changelog
 

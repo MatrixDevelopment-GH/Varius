@@ -1,10 +1,21 @@
-import { APIApplicationCommandBasicOption, ApplicationCommandOptionType } from 'discord.js';
+import {
+    APIApplicationCommandBasicOption,
+    APIApplicationCommandUserOption,
+    ApplicationCommandOptionType,
+} from 'discord.js';
 
 import { HelpOption, InfoOption } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
 
 export class Args {
+    public static readonly IQ_OPTION: APIApplicationCommandUserOption = {
+        name: Lang.getRef('arguments.iq', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.iq'),
+        description: Lang.getRef('argDescs.iqOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.iqOption'),
+        type: ApplicationCommandOptionType.User,
+    };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.option', Language.Default),
         name_localizations: Lang.getRefLocalizationMap('arguments.option'),

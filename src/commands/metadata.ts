@@ -58,7 +58,22 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.bj'),
         dm_permission: true,
         default_member_permissions: undefined,
-    }
+    },
+    IQ: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.iq', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.iq'),
+        description: Lang.getRef('commandDescs.iq', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.iq'),
+        dm_permission: true,
+        default_member_permissions: undefined,
+        options: [
+            {
+                ...Args.IQ_OPTION,
+                required: false,
+            },
+        ],
+    },
 };
 
 export const MessageCommandMetadata: {

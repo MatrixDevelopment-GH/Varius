@@ -138,6 +138,9 @@
                         "value": "{{BJ_OPTIONS}}"
                     }
                 ]
+            },
+            "iq": {
+                "description": "{{MENTIONED_USER}} has a IQ of {{IQ}}"
             }
         },
         "validationEmbeds": {
@@ -205,7 +208,8 @@
             "help": "help",
             "info": "info",
             "test": "test",
-            "bj": "bj"
+            "bj": "bj",
+            "iq": "iq"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -214,17 +218,20 @@
             "viewDateSent": "View Date Sent"
         },
         "arguments": {
-            "option": "option"
+            "option": "option",
+            "iq": "user"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
             "info": "View bot info.",
             "test": "Run the test command.",
-            "bj": "Play a game of Blackjack!"
+            "bj": "Play a game of Blackjack!",
+            "iq": "Get the IQ of somebody."
         },
         "argDescs": {
             "helpOption": "Option.",
-            "infoOption": "Option."
+            "infoOption": "Option.",
+            "iqOption": "Option."
         },
         "fields": {
             "commands": "Commands",
@@ -281,6 +288,9 @@
         "bjOptions": {
             "hit": "Hit",
             "stand": "Stand"
+        },
+        "iqOptions": {
+            "user": "User"
         },
         "helpOptions": {
             "contactSupport": "Contact Support",
