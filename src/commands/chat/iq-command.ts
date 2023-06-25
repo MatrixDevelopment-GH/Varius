@@ -18,7 +18,6 @@ export class IqCommand implements Command {
             option:
                 intr.options.getUser(Lang.getRef('arguments.iq', Language.Default)) ?? intr.user,
         };
-        console.log(args.option);
         let IQ = Math.floor(Math.random() * 2000 - 1000);
         let embed = Lang.getEmbed('displayEmbeds.iq', data.lang, {
             MENTIONED_USER: `${args.option}`,

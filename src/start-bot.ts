@@ -3,6 +3,7 @@ import { Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
 
 import { Button } from './buttons/index.js';
+import { PurgeCommand } from './commands/administration/index.js';
 import { BjCommand } from './commands/casino/index.js';
 import { HelpCommand, InfoCommand, IqCommand, TestCommand } from './commands/chat/index.js';
 import {
@@ -60,8 +61,15 @@ async function start(): Promise<void> {
         new HelpCommand(),
         new InfoCommand(),
         new TestCommand(),
+
+        // Casino Commands
         new BjCommand(),
+
+        // Fun Commands
         new IqCommand(),
+
+        // Admin/Moderator Commands
+        new PurgeCommand(),
 
         // Message Context Commands
         new ViewDateSent(),

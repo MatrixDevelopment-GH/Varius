@@ -6,7 +6,6 @@
     },
     "plugins": ["@typescript-eslint", "import", "unicorn"],
     "extends": [
-        "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:import/recommended",
@@ -72,13 +71,6 @@
         "no-return-await": "off",
         "no-unused-vars": "off",
         "prefer-const": "off",
-        "quotes": [
-            "error",
-            "single",
-            {
-                "allowTemplateLiterals": true
-            }
-        ],
         "sort-imports": [
             "error",
             {

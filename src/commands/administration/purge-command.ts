@@ -20,14 +20,21 @@ export class PurgeCommand implements Command {
         const ee = e['options']['getInteger']('amount') || 1;
 
         if (ee <= 0) {
-            await eeeee['send'](e, 'Seriously? You expect me to delete 0 messages? Get real!');
+            let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
+                STATUS: Lang.getRef('purgeDescs.error', data.lang),
+            });
+            await eeeee.send(e, embed);
             return;
         }
         e['channel']['bulkDelete'](ee, true);
 
         const eee = ee === 1 ? 'message' : 'messages';
-        const eeee = `B^O^O^M! ${ee} ${eee} annihilated from existence!`;
-
-        await eeeee['send'](e, eeee);
+        let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
+            STATUS: Lang.getRef('purgeDescs.success', data.lang, {
+                EE: `${ee}`,
+                EEE: `${eee}`,
+            }),
+        });
+        await eeeee.send(e, embed);
     }
 }

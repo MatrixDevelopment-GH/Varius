@@ -7,32 +7,24 @@ import {
 } from 'discord.js';
 import { RateLimiter } from 'discord.js-rate-limiter';
 
-import { Deck } from '../../jobs/index.js';
+import { DealerPlay, Deck } from '../../jobs/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
 import { InteractionUtils } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
-function drawCard(): {
-    rank: string;
-    suit: string;
-} {
-    const deck = new Deck();
-    const createDeck = deck.createDeck(false);
-    const card = createDeck.pop();
-    console.log(card);
-    return card;
-}
+const deck = new Deck();
+const dealer = new DealerPlay();
 
 function getVal(hand: any): number {
-    const deck = new Deck();
-    const val = deck.getHandValue(hand);
+    const val = deck.getHandValueBj(hand);
     return val;
 }
 
 // TODO: Add a way to draw new cards and put em into the player's hands
 // TODO: Add a win mechanism
+// TODO: Update Linguini
 export class BjCommand implements Command {
     public names = [Lang.getRef('chatCommands.bj', Language.Default)];
     public cooldown = new RateLimiter(1, 10000);
@@ -41,18 +33,12 @@ export class BjCommand implements Command {
 
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         // The initial hand of both the player & the dealer
-        const playerCards = [drawCard(), drawCard()];
-        const dealerCards = [drawCard()];
+        const playerCards = [deck.drawCard(), deck.drawCard()];
+        const dealerCards = [deck.drawCard()];
 
         let embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
-            BJ_PLAYER_HAND: `
-            ${playerCards.map(i => i.rank + ' of ' + i.suit + ' ')}
-            , current points: ${getVal(playerCards)}
-            `,
-            BJ_DEALER_HAND: `
-            ${dealerCards.map(i => i.rank + ' of ' + i.suit + ' ')}, ?
-            ( current points: ${getVal(dealerCards)}) 
-            `,
+            BJ_PLAYER_HAND: `Your Hand: ${getVal(playerCards)}`,
+            BJ_DEALER_HAND: `Dealer's Hand: ${getVal(dealerCards)}`,
         }).setColor('Random');
 
         const hit = new ButtonBuilder()
@@ -67,5 +53,45 @@ export class BjCommand implements Command {
             new ActionRowBuilder<ButtonBuilder>().addComponents(hit, stand);
 
         await InteractionUtils.send(intr, { embeds: [embed], components: [row] });
+
+        const filter: any = i => i.user.id === intr.user.id;
+        const collector = intr.channel.createMessageComponentCollector({
+            filter: filter,
+            time: 20000,
+        });
+
+        collector.on('collect', async i => {
+            switch (i.customId) {
+                case 'hit':
+                    const newCard = deck.drawCard();
+                    playerCards.push(newCard);
+                    const handValue = deck.getHandValueBj(playerCards);
+
+                    if (handValue > 21) {
+                        collector.stop();
+                        return await deck.endGameBj(
+                            intr,
+                            playerCards,
+                            dealerCards,
+                            'You went bust! You lose.',
+                            0,
+                            data.lang
+                        );
+                    }
+
+                    embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
+                        BJ_PLAYER_HAND: `Your Hand: ${handValue}`,
+                        BJ_DEALER_HAND: `Dealer's Hand: ${getVal(dealerCards)}`,
+                    });
+                    embed.setDescription(`You drew a ${newCard.rank} of ${newCard.suit}!`);
+                    await InteractionUtils.editReply(intr, { embeds: [embed] });
+                    collector.resetTimer();
+                    break;
+                case 'stand':
+                    collector.stop();
+                    await dealer.dealerPlayBj(intr, playerCards, dealerCards, data.lang);
+                    break;
+            }
+        });
     }
 }

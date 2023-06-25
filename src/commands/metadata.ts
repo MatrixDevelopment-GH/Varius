@@ -1,5 +1,6 @@
 import {
     ApplicationCommandType,
+    PermissionsBitField,
     RESTPostAPIChatInputApplicationCommandsJSONBody,
     RESTPostAPIContextMenuApplicationCommandsJSONBody,
 } from 'discord.js';
@@ -67,6 +68,21 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.iq'),
         dm_permission: true,
         default_member_permissions: undefined,
+        options: [
+            {
+                ...Args.IQ_OPTION,
+                required: false,
+            },
+        ],
+    },
+    PURGE: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.purge', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.purge'),
+        description: Lang.getRef('commandDescs.purge', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.purge'),
+        dm_permission: false,
+        default_member_permissions: `${PermissionsBitField.Flags.Administrator}`,
         options: [
             {
                 ...Args.IQ_OPTION,

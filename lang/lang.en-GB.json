@@ -132,15 +132,15 @@
                     {
                         "name": "Dealer's Hand",
                         "value": "{{BJ_DEALER_HAND}}"
-                    },
-                    {
-                        "name": "Options",
-                        "value": "{{BJ_OPTIONS}}"
                     }
                 ]
             },
             "iq": {
                 "description": "{{MENTIONED_USER}} has a IQ of {{IQ}}"
+            },
+            "purge": {
+                "title": "Purge {{STATUS}}",
+                "description": "{{MESSAGE}}"
             }
         },
         "validationEmbeds": {
@@ -209,7 +209,8 @@
             "info": "info",
             "test": "test",
             "bj": "bj",
-            "iq": "iq"
+            "iq": "iq",
+            "purge": "purge"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -226,12 +227,17 @@
             "info": "View bot info.",
             "test": "Run the test command.",
             "bj": "Play a game of Blackjack!",
-            "iq": "Get the IQ of somebody."
+            "iq": "Get the IQ of somebody.",
+            "purge": "Delete multiple messages at once"
         },
         "argDescs": {
             "helpOption": "Option.",
             "infoOption": "Option.",
             "iqOption": "Option."
+        },
+        "purgeDescs": {
+            "error": "Seriously? You expect me to delete 0 messages? Get real!",
+            "success": "B^O^O^M! {{EE}} {{EEE}} annihilated from existence!"
         },
         "fields": {
             "commands": "Commands",
