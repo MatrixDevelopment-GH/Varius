@@ -240,8 +240,8 @@
             "success": "B^O^O^M! {{EE}} {{EEE}} annihilated from existence!"
         },
         "bjDescs": {
-            "your_hand": "Your hand",
-            "dealer_hand": "Dealer's Hand",
+            "your_hand": "Your hand:",
+            "dealer_hand": "Dealer's Hand:",
             "draw_card": "You drew a {{RANK}} of {{SUIT}}!",
             "lose": "You went bust! You lose.",
             "tie": "It's a tie!",
