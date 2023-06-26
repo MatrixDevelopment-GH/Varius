@@ -151,12 +151,16 @@
                 "description": "Net worth: {{NET_WORTH}}",
                 "fields": [
                     {
+                        "name": "Cash",
+                        "value": "{{CASH}}"
+                    },
+                    {
                         "name": "Properties",
                         "value": "{{PROPERTY}}"
                     },
                     {
-                        "name": "Cash",
-                        "value": "{{CASH}}"
+                        "name": "Stocks",
+                        "value": "{{STOCKS}}"
                     }
                 ]
             }
