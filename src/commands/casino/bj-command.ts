@@ -92,6 +92,17 @@ export class BjCommand implements Command {
                             data.lang
                         );
                     }
+                    if (handValue == 21) {
+                        collector.stop();
+                        return await deck.endGameBj(
+                            intr,
+                            playerCards,
+                            dealerCards,
+                            `${Lang.getRef('bjDescs.win', data.lang)}`,
+                            2,
+                            data.lang
+                        );
+                    }
 
                     embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
                         BJ_PLAYER_HAND: `${Lang.getRef(
