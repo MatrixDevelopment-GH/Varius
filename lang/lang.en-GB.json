@@ -145,6 +145,20 @@
             "accountNotCreated": {
                 "title": "Nonexistent",
                 "description": "You haven't made an account yet! A new account has been made for you, which has $1000."
+            },
+            "portfolio": {
+                "title": "{{MENTIONED_USER}}'s portfolio",
+                "description": "Net worth: {{NET_WORTH}}",
+                "fields": [
+                    {
+                        "name": "Properties",
+                        "value": "{{PROPERTY}}"
+                    },
+                    {
+                        "name": "Cash",
+                        "value": "{{CASH}}"
+                    }
+                ]
             }
         },
         "validationEmbeds": {
@@ -214,7 +228,8 @@
             "test": "test",
             "bj": "bj",
             "iq": "iq",
-            "purge": "purge"
+            "purge": "purge",
+            "portfolio": "portfolio"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -232,7 +247,8 @@
             "test": "Run the test command.",
             "bj": "Play a game of Blackjack!",
             "iq": "Get the IQ of somebody.",
-            "purge": "Delete multiple messages at once"
+            "purge": "Delete multiple messages at once",
+            "portfolio": "Look at how much money someone has."
         },
         "argDescs": {
             "helpOption": "Option.",
