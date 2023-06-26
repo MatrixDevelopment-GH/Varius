@@ -73,10 +73,10 @@ export class Deck {
         data: any
     ): Promise<void> {
         let embed = Lang.getEmbed('displayEmbeds.bj', data, {
-            BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data.lang)} ${this.getHandValueBj(
+            BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data)} ${this.getHandValueBj(
                 playerCards
             )}`,
-            BJ_DEALER_HAND: `${Lang.getRef('bjDescs.dealer_hand', data.lang)} ${this.getHandValueBj(
+            BJ_DEALER_HAND: `${Lang.getRef('bjDescs.dealer_hand', data)} ${this.getHandValueBj(
                 dealerCards
             )}`,
         })
