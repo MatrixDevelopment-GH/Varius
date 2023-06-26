@@ -40,10 +40,10 @@ export class PortfolioCommand implements Command {
         }
 
         let embed = Lang.getEmbed('displayEmbeds.portfolio', data.lang, {
-            MENTIONED_USER: `${args.option}`,
+            MENTIONED_USER: `${args.option.username}`,
             NET_WORTH: `${findTotal()}`,
             CASH: `${user.balance}`,
-            PROPERTY: `${user.properties.map((asset) => asset.name)}`,
+            PROPERTY: `${(user.properties.map((asset) => asset.name)).toString() == ""  ? user.properties.map((asset) => asset.name) : "This person doesn't own any properties!"}`,
             STOCK: `to be implemented`,
         });
         await InteractionUtils.send(intr, { embeds: [embed] });

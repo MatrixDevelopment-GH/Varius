@@ -19,8 +19,8 @@ export class Args {
     public static readonly PORTFOLIO_OPTION: APIApplicationCommandUserOption = {
         name: Lang.getRef('arguments.portfolio', Language.Default),
         name_localizations: Lang.getRefLocalizationMap('arguments.portfolio'),
-        description: Lang.getRef('argDescs.portfolioOption', Language.Default),
-        description_localizations: Lang.getRefLocalizationMap('argDescs.portfolioOption'),
+        description: Lang.getRef('argDescs.portOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.portOption'),
         type: ApplicationCommandOptionType.User,
     };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {

@@ -87,9 +87,9 @@ export const ChatCommandMetadata: {
     PORTFOLIO: {
         type: ApplicationCommandType.ChatInput,
         name: Lang.getRef('chatCommands.portfolio', Language.Default),
-        name_localizations: Lang.getRefLocalizationMap('chatCommands.iq'),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.portfolio'),
         description: Lang.getRef('commandDescs.portfolio', Language.Default),
-        description_localizations: Lang.getRefLocalizationMap('commandDescs.iq'),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.portfolio'),
         dm_permission: true,
         default_member_permissions: undefined,
         options: [

@@ -244,7 +244,7 @@
         "arguments": {
             "option": "option",
             "iq": "user",
-            "portfolio": "someone's portfolio"
+            "portfolio": "portfolio"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -259,7 +259,7 @@
             "helpOption": "Option.",
             "infoOption": "Option.",
             "iqOption": "Option.",
-            "portfolioOption": "Option."
+            "portOption": "Option."
         },
         "purgeDescs": {
             "error": "Seriously? You expect me to delete 0 messages? Get real!",

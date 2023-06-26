@@ -243,7 +243,8 @@
         },
         "arguments": {
             "option": "option",
-            "iq": "user"
+            "iq": "user",
+            "portfolio": "portfolio"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -257,7 +258,8 @@
         "argDescs": {
             "helpOption": "Option.",
             "infoOption": "Option.",
-            "iqOption": "Option."
+            "iqOption": "Option.",
+            "portOption": "Option."
         },
         "purgeDescs": {
             "error": "Seriously? You expect me to delete 0 messages? Get real!",
