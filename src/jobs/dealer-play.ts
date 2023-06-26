@@ -1,4 +1,5 @@
 import { Deck } from './deck.js';
+import { Lang } from '../services/lang.js';
 
 export class DealerPlay {
     public async dealerPlayBj(
@@ -17,11 +18,32 @@ export class DealerPlay {
         const dealerValue = deck.getHandValueBj(dealerCards);
 
         if (dealerValue > 21 || dealerValue < playerValue) {
-            return await deck.endGameBj(intr, playerCards, dealerCards, 'You win!', 2, data);
+            return await deck.endGameBj(
+                intr,
+                playerCards,
+                dealerCards,
+                Lang.getRef('bjDescs.win', data),
+                2,
+                data
+            );
         } else if (dealerValue === playerValue) {
-            return await deck.endGameBj(intr, playerCards, dealerCards, "It's a tie!", 1, data);
+            return await deck.endGameBj(
+                intr,
+                playerCards,
+                dealerCards,
+                Lang.getRef('bjDescs.tie', data),
+                1,
+                data
+            );
         } else {
-            return await deck.endGameBj(intr, playerCards, dealerCards, 'You lose.', 0, data);
+            return await deck.endGameBj(
+                intr,
+                playerCards,
+                dealerCards,
+                Lang.getRef('bjDescs.lose', data),
+                0,
+                data
+            );
         }
     }
 }

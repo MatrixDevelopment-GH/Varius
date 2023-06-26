@@ -17,14 +17,6 @@ import { Command, CommandDeferType } from '../index.js';
 const deck = new Deck();
 const dealer = new DealerPlay();
 
-function getVal(hand: any): number {
-    const val = deck.getHandValueBj(hand);
-    return val;
-}
-
-// TODO: Add a way to draw new cards and put em into the player's hands
-// TODO: Add a win mechanism
-// TODO: Update Linguini
 export class BjCommand implements Command {
     public names = [Lang.getRef('chatCommands.bj', Language.Default)];
     public cooldown = new RateLimiter(1, 10000);
@@ -37,8 +29,12 @@ export class BjCommand implements Command {
         const dealerCards = [deck.drawCard()];
 
         let embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
-            BJ_PLAYER_HAND: `Your Hand: ${getVal(playerCards)}`,
-            BJ_DEALER_HAND: `Dealer's Hand: ${getVal(dealerCards)}`,
+            BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data.lang)} ${deck.getHandValueBj(
+                playerCards
+            )}`,
+            BJ_DEALER_HAND: `${Lang.getRef('bjDescs.dealer_hand', data.lang)} ${deck.getHandValueBj(
+                dealerCards
+            )}`,
         }).setColor('Random');
 
         const hit = new ButtonBuilder()
@@ -73,17 +69,28 @@ export class BjCommand implements Command {
                             intr,
                             playerCards,
                             dealerCards,
-                            'You went bust! You lose.',
+                            `${Lang.getRef('bjDescs.lose', data.lang)}`,
                             0,
                             data.lang
                         );
                     }
 
                     embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
-                        BJ_PLAYER_HAND: `Your Hand: ${handValue}`,
-                        BJ_DEALER_HAND: `Dealer's Hand: ${getVal(dealerCards)}`,
+                        BJ_PLAYER_HAND: `${Lang.getRef(
+                            'bjDescs.your_hand',
+                            data.lang
+                        )} ${handValue}`,
+                        BJ_DEALER_HAND: `${Lang.getRef(
+                            'bjDescs.dealer_hand',
+                            data.lang
+                        )} ${deck.getHandValueBj(dealerCards)}`,
                     });
-                    embed.setDescription(`You drew a ${newCard.rank} of ${newCard.suit}!`);
+                    embed.setDescription(
+                        `${Lang.getRef('bjDescs.draw_card', data.lang, {
+                            RANK: newCard.rank,
+                            SUIT: newCard.suit,
+                        })}`
+                    );
                     await InteractionUtils.editReply(intr, { embeds: [embed] });
                     collector.resetTimer();
                     break;

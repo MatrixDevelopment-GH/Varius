@@ -73,8 +73,12 @@ export class Deck {
         data: any
     ): Promise<void> {
         let embed = Lang.getEmbed('displayEmbeds.bj', data, {
-            BJ_PLAYER_HAND: `Player's Hand: ${this.getHandValueBj(playerCards)}`,
-            BJ_DEALER_HAND: `Dealer's Hand: ${this.getHandValueBj(dealerCards)}`,
+            BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data.lang)} ${this.getHandValueBj(
+                playerCards
+            )}`,
+            BJ_DEALER_HAND: `${Lang.getRef('bjDescs.dealer_hand', data.lang)} ${this.getHandValueBj(
+                dealerCards
+            )}`,
         })
             .setColor(status == 0 ? 'Red' : status == 1 ? 'Blurple' : 'Green')
             .setDescription(result);

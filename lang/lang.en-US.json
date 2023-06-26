@@ -239,6 +239,14 @@
             "error": "Seriously? You expect me to delete 0 messages? Get real!",
             "success": "B^O^O^M! {{EE}} {{EEE}} annihilated from existence!"
         },
+        "bjDescs": {
+            "your_hand": "Your hand",
+            "dealer_hand": "Dealer's Hand",
+            "draw_card": "You drew a {{RANK}} of {{SUIT}}!",
+            "lose": "You went bust! You lose.",
+            "tie": "It's a tie!",
+            "win": "You won GG!"
+        },
         "fields": {
             "commands": "Commands",
             "links": "Links"
