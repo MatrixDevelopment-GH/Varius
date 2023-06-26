@@ -11,7 +11,7 @@ import { DealerPlay, Deck } from '../../jobs/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
-import { InteractionUtils } from '../../utils/index.js';
+import { InteractionUtils, prisma } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
 const deck = new Deck();
@@ -24,6 +24,24 @@ export class BjCommand implements Command {
     public requireClientPerms: PermissionsString[] = [];
 
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
+        // Checks to see if user has account
+        let user = await prisma.user.findUnique({
+            where: {
+                user_id: intr.user.id,
+            },
+        });
+
+        if (!user) {
+            await prisma.user.create({
+                data: {
+                    user_id: intr.user.id,
+                },
+            });
+            await InteractionUtils.send(intr, {
+                embeds: [Lang.getEmbed('displayEmbeds.accountNotCreated', data.lang)],
+            });
+        }
+
         // The initial hand of both the player & the dealer
         const playerCards = [deck.drawCard(), deck.drawCard()];
         const dealerCards = [deck.drawCard()];

@@ -17,8 +17,6 @@ export class HelpCommand implements Command {
                 Lang.getRef('arguments.option', Language.Default)
             ) as HelpOption,
         };
-        console.log(args.option);
-        console.log(intr.options);
 
         let embed: EmbedBuilder;
         switch (args.option) {

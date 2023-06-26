@@ -141,6 +141,10 @@
             "purge": {
                 "title": "Purge {{STATUS}}",
                 "description": "{{MESSAGE}}"
+            },
+            "accountNotCreated": {
+                "title": "Nonexistent",
+                "description": "You haven't made an account yet! A new account has been made for you, which has $1000."
             }
         },
         "validationEmbeds": {
