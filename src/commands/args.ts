@@ -16,6 +16,13 @@ export class Args {
         description_localizations: Lang.getRefLocalizationMap('argDescs.iqOption'),
         type: ApplicationCommandOptionType.User,
     };
+    public static readonly PORTFOLIO_OPTION: APIApplicationCommandUserOption = {
+        name: Lang.getRef('arguments.portfolio', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.portfolio'),
+        description: Lang.getRef('argDescs.portfolioOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.portfolioOption'),
+        type: ApplicationCommandOptionType.User,
+    };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.option', Language.Default),
         name_localizations: Lang.getRefLocalizationMap('arguments.option'),

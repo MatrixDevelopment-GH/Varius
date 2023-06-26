@@ -83,9 +83,18 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.purge'),
         dm_permission: false,
         default_member_permissions: `${PermissionsBitField.Flags.Administrator}`,
+    },
+    PORTFOLIO: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.portfolio', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.iq'),
+        description: Lang.getRef('commandDescs.portfolio', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.iq'),
+        dm_permission: true,
+        default_member_permissions: undefined,
         options: [
             {
-                ...Args.IQ_OPTION,
+                ...Args.PORTFOLIO_OPTION,
                 required: false,
             },
         ],
