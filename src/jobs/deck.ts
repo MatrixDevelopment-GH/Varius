@@ -1,6 +1,6 @@
 import { cardRank } from '../constants/card-rank.js';
 import { Lang } from '../services/lang.js';
-import { InteractionUtils } from '../utils/interaction-utils.js';
+import { InteractionUtils, prisma } from '../utils/index.js';
 
 export class Deck {
     public shuffle(deck: any): any {
@@ -72,6 +72,21 @@ export class Deck {
         status: number,
         data: any
     ): Promise<void> {
+        let user = prisma.user.findUnique({
+            where: {
+                user_id: intr.user.id,
+            },
+        });
+
+        function field(): any {
+            status == 0 ? (user.balance -= 50) : status == 2 ? (user.balance += 50) : user.balance;
+            return {
+                name: 'Cash',
+                value: `You have ${user.balance} as cash after the blackjack game`,
+                inline: true,
+            };
+        }
+
         let embed = Lang.getEmbed('displayEmbeds.bj', data, {
             BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data)} ${this.getHandValueBj(
                 playerCards
@@ -80,9 +95,9 @@ export class Deck {
                 dealerCards
             )}`,
         })
+            .addFields(field())
             .setColor(status == 0 ? 'Red' : status == 1 ? 'Blurple' : 'Green')
             .setDescription(result);
-
         await InteractionUtils.editReply(intr, { embeds: [embed], components: [] });
     }
 }

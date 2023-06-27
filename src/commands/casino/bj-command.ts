@@ -23,9 +23,11 @@ export class BjCommand implements Command {
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
 
+    // TODO: Add a way to add/subtract money from user's account
+    // TODO: Add a betting system
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         // Checks to see if user has account
-        const id = intr.user.id
+        const id = intr.user.id;
         let user = await prisma.user.findUnique({
             where: {
                 user_id: id,
@@ -45,16 +47,18 @@ export class BjCommand implements Command {
             // The initial hand of both the player & the dealer
             const playerCards = [deck.drawCard(), deck.drawCard()];
             const dealerCards = [deck.drawCard()];
-    
+
             let embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
-                BJ_PLAYER_HAND: `${Lang.getRef('bjDescs.your_hand', data.lang)} ${deck.getHandValueBj(
-                    playerCards
-                )}`,
-                BJ_DEALER_HAND: `${Lang.getRef('bjDescs.dealer_hand', data.lang)} ${deck.getHandValueBj(
-                    dealerCards
-                )}`,
+                BJ_PLAYER_HAND: `${Lang.getRef(
+                    'bjDescs.your_hand',
+                    data.lang
+                )} ${deck.getHandValueBj(playerCards)}`,
+                BJ_DEALER_HAND: `${Lang.getRef(
+                    'bjDescs.dealer_hand',
+                    data.lang
+                )} ${deck.getHandValueBj(dealerCards)}`,
             }).setColor('Random');
-    
+
             const hit = new ButtonBuilder()
                 .setCustomId('hit')
                 .setLabel(Lang.getRef('bjOptions.hit', Language.Default))
@@ -65,22 +69,22 @@ export class BjCommand implements Command {
                 .setStyle(ButtonStyle.Primary);
             const row: ActionRowBuilder<ButtonBuilder> =
                 new ActionRowBuilder<ButtonBuilder>().addComponents(hit, stand);
-    
+
             await InteractionUtils.send(intr, { embeds: [embed], components: [row] });
-    
+
             const filter: any = i => i.user.id === intr.user.id;
             const collector = intr.channel.createMessageComponentCollector({
                 filter: filter,
                 time: 20000,
             });
-    
+
             collector.on('collect', async i => {
                 switch (i.customId) {
                     case 'hit':
                         const newCard = deck.drawCard();
                         playerCards.push(newCard);
                         const handValue = deck.getHandValueBj(playerCards);
-    
+
                         if (handValue > 21) {
                             collector.stop();
                             return await deck.endGameBj(
@@ -103,7 +107,7 @@ export class BjCommand implements Command {
                                 data.lang
                             );
                         }
-    
+
                         embed = Lang.getEmbed('displayEmbeds.bj', data.lang, {
                             BJ_PLAYER_HAND: `${Lang.getRef(
                                 'bjDescs.your_hand',
@@ -130,6 +134,5 @@ export class BjCommand implements Command {
                 }
             });
         }
-
     }
 }
