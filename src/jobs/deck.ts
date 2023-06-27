@@ -21,6 +21,37 @@ export class Deck {
         return card;
     }
 
+    public async updateBalance(userId: any, status: number, bet: number): Promise<void> {
+        let user = await prisma.user.findUnique({
+            where: {
+                user_id: userId,
+            },
+        });
+        let balance = user.balance;
+        status == 2 ? balance += bet : status == 0 ? balance -= bet : balance
+        if (status == 0) {
+            console.log("status 0")
+            await prisma.user.update({
+                where: {
+                    user_id: userId,
+                },
+                data: {
+                    balance: balance,
+                },
+            });
+        } else if (status == 2) {
+            console.log("status 2")
+            await prisma.user.update({
+                where: {
+                    user_id: userId,
+                },
+                data: {
+                    balance: balance,
+                },
+            });
+        }
+    }
+
     public createDeckBj(withJokers: boolean): any {
         const suits = cardRank.suits;
         const ranks = cardRank.ranks;
@@ -70,19 +101,17 @@ export class Deck {
         dealerCards: any,
         result: string,
         status: number,
+        betted: number,
         data: any
     ): Promise<void> {
-        let user = prisma.user.findUnique({
-            where: {
-                user_id: intr.user.id,
-            },
-        });
-
+        let desc = '';
+        status == 0 ? desc = 'loseBets' : status == 1 ? desc = 'tieBets' : desc = 'winBets'
         function field(): any {
-            status == 0 ? (user.balance -= 50) : status == 2 ? (user.balance += 50) : user.balance;
             return {
                 name: 'Cash',
-                value: `You have ${user.balance} as cash after the blackjack game`,
+                value: Lang.getRef(`bjDescs.${desc}`, data, {
+                    BET: `${betted}`
+                }),
                 inline: true,
             };
         }

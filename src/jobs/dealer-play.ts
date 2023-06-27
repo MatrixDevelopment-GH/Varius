@@ -6,7 +6,8 @@ export class DealerPlay {
         intr: any,
         playerCards: any,
         dealerCards: any,
-        data: any
+        data: any,
+        betted: number
     ): Promise<any> {
         const deck = new Deck();
 
@@ -18,12 +19,14 @@ export class DealerPlay {
         const dealerValue = deck.getHandValueBj(dealerCards);
 
         if (dealerValue > 21 || dealerValue < playerValue) {
+            deck.updateBalance(intr.user.id, 2, betted);
             return await deck.endGameBj(
                 intr,
                 playerCards,
                 dealerCards,
                 Lang.getRef('bjDescs.win', data),
                 2,
+                betted,
                 data
             );
         } else if (dealerValue === playerValue) {
@@ -33,15 +36,18 @@ export class DealerPlay {
                 dealerCards,
                 Lang.getRef('bjDescs.tie', data),
                 1,
+                betted,
                 data
             );
         } else {
+            deck.updateBalance(intr.user.id, 0, betted);
             return await deck.endGameBj(
                 intr,
                 playerCards,
                 dealerCards,
                 Lang.getRef('bjDescs.lose', data),
                 0,
+                betted,
                 data
             );
         }

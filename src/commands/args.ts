@@ -1,6 +1,7 @@
 import {
     APIApplicationCommandBasicOption,
     APIApplicationCommandUserOption,
+    APIApplicationCommandNumberOption,
     ApplicationCommandOptionType,
 } from 'discord.js';
 
@@ -22,6 +23,13 @@ export class Args {
         description: Lang.getRef('argDescs.portOption', Language.Default),
         description_localizations: Lang.getRefLocalizationMap('argDescs.portOption'),
         type: ApplicationCommandOptionType.User,
+    };
+    public static readonly BJ_OPTION: APIApplicationCommandNumberOption = {
+        name: Lang.getRef('arguments.bj', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.bj'),
+        description: Lang.getRef('argDescs.bjOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.bjOption'),
+        type: ApplicationCommandOptionType.Number,
     };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.option', Language.Default),

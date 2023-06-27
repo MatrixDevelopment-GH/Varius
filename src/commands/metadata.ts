@@ -59,6 +59,12 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.bj'),
         dm_permission: true,
         default_member_permissions: undefined,
+        options: [
+            {
+                ...Args.BJ_OPTION,
+                required: false,
+            }
+        ]
     },
     IQ: {
         type: ApplicationCommandType.ChatInput,
@@ -99,6 +105,15 @@ export const ChatCommandMetadata: {
             },
         ],
     },
+    DELETE: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.delete', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.delete'),
+        description: Lang.getRef('commandDescs.delete', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.delete'),
+        dm_permission: false,
+        default_member_permissions: undefined,
+    }
 };
 
 export const MessageCommandMetadata: {

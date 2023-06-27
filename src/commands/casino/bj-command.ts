@@ -23,9 +23,15 @@ export class BjCommand implements Command {
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
 
-    // TODO: Add a way to add/subtract money from user's account
     // TODO: Add a betting system
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
+        let args = {
+            option: intr.options.getInteger('arguments.bj') ?? 50,
+        };
+        console.log(intr.options.getInteger('arguments.bj'))
+        let betted = args.option;
+        console.log(args.option);
+
         // Checks to see if user has account
         const id = intr.user.id;
         let user = await prisma.user.findUnique({
@@ -67,8 +73,13 @@ export class BjCommand implements Command {
                 .setCustomId('stand')
                 .setLabel(Lang.getRef('bjOptions.stand', Language.Default))
                 .setStyle(ButtonStyle.Primary);
+            const double = new ButtonBuilder()
+                .setCustomId('double')
+                .setLabel(Lang.getRef('bjOptions.double', Language.Default))
+                .setStyle(ButtonStyle.Danger)
+                .setDisabled(deck.getHandValueBj(playerCards) > 16);
             const row: ActionRowBuilder<ButtonBuilder> =
-                new ActionRowBuilder<ButtonBuilder>().addComponents(hit, stand);
+                new ActionRowBuilder<ButtonBuilder>().addComponents(double, hit, stand);
 
             await InteractionUtils.send(intr, { embeds: [embed], components: [row] });
 
@@ -79,7 +90,26 @@ export class BjCommand implements Command {
             });
 
             collector.on('collect', async i => {
+                let doubled = 0;
                 switch (i.customId) {
+                    case 'double':
+                        doubled += 1;
+                        betted *= 2;
+                        console.log(betted);
+                        if (deck.getHandValueBj(playerCards) > 15 || doubled >= 5) {
+                            row[0].setDisabled(true);
+                        }
+                        embed.setDescription(
+                            `${Lang.getRef('bjDescs.bet', data.lang, {
+                                BET: `${betted}`,
+                            })}`
+                        );
+                        await InteractionUtils.editReply(intr, {
+                            embeds: [embed],
+                            components: [row],
+                        });
+                        collector.resetTimer();
+                        break;
                     case 'hit':
                         const newCard = deck.drawCard();
                         playerCards.push(newCard);
@@ -87,23 +117,27 @@ export class BjCommand implements Command {
 
                         if (handValue > 21) {
                             collector.stop();
+                            deck.updateBalance(intr.user.id, 0, betted);
                             return await deck.endGameBj(
                                 intr,
                                 playerCards,
                                 dealerCards,
                                 `${Lang.getRef('bjDescs.lose', data.lang)}`,
                                 0,
+                                betted,
                                 data.lang
                             );
                         }
                         if (handValue == 21) {
                             collector.stop();
+                            deck.updateBalance(intr.user.id, 2, betted);
                             return await deck.endGameBj(
                                 intr,
                                 playerCards,
                                 dealerCards,
                                 `${Lang.getRef('bjDescs.win', data.lang)}`,
                                 2,
+                                betted,
                                 data.lang
                             );
                         }
@@ -129,7 +163,13 @@ export class BjCommand implements Command {
                         break;
                     case 'stand':
                         collector.stop();
-                        await dealer.dealerPlayBj(intr, playerCards, dealerCards, data.lang);
+                        await dealer.dealerPlayBj(
+                            intr,
+                            playerCards,
+                            dealerCards,
+                            data.lang,
+                            betted
+                        );
                         break;
                 }
             });

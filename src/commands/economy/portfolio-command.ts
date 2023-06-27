@@ -32,79 +32,81 @@ export class PortfolioCommand implements Command {
             },
         });
 
-        // TODO: get net worth + all other stats
-        let total = 0.0;
-        function findTotal(): number {
-            user.properties.map(asset => {
-                total += asset.price;
+        if (!user) {
+            await InteractionUtils.send(intr, {
+                embeds: [Lang.getEmbed('displayEmbeds.accountNotFound', data.lang)],
             });
-            user.stocks.map(async stock => {
-                let price = await prismaUtils.getStock(stock.ticker);
-                if (price != stock.currentPrice) {
-                    prisma.stock.update({
-                        where: {
-                            id: stock.id,
-                        },
-                        data: {
-                            currentPrice: price,
-                        },
-                    });
-                }
-                total += stock.amount * price;
-            });
-            total += user.balance;
-            console.log(total);
-            return total;
+        } else {
+            let total = 0.0;
+            function findTotal(): number {
+                user.properties.map(asset => {
+                    total += asset.price;
+                });
+                user.stocks.map(async stock => {
+                    let price = await prismaUtils.getStock(stock.ticker);
+                    if (price != stock.currentPrice) {
+                        prisma.stock.update({
+                            where: {
+                                id: stock.id,
+                            },
+                            data: {
+                                currentPrice: price,
+                            },
+                        });
+                    }
+                    total += stock.amount * price;
+                });
+                total += user.balance;
+                return total;
+            }
+    
+            function findAssets(): string[] {
+                let assets = [];
+                user.properties.map(asset => {
+                    assets.push(asset.name);
+                });
+                return assets;
+            }
+    
+            let fields: any[] = await Promise.all(
+                user.stocks.map(async stock => {
+                    let amount = await prismaUtils.getStock(stock.ticker);
+                    if (amount != stock.currentPrice) {
+                        prisma.stock.update({
+                            where: {
+                                id: stock.id,
+                            },
+                            data: {
+                                currentPrice: amount,
+                            },
+                        });
+                    }
+                    return {
+                        name: `${stock.ticker}: ${stock.amount}x `,
+                        value: `**Worth: ** ${(stock.currentPrice * stock.amount).toFixed(2)}$ → ${(
+                            amount * stock.amount
+                        ).toFixed(2)}$`,
+                        inline: true,
+                    };
+                })
+            );
+    
+            nwCache[user.user_id] = user.balance + total;
+    
+            let embed = Lang.getEmbed('displayEmbeds.portfolio', data.lang, {
+                MENTIONED_USER: `${args.option.username}`,
+                NET_WORTH: `${findTotal()}`,
+                CASH: `${user.balance}`,
+                PROPERTY: `${
+                    findAssets().length == 0
+                        ? Lang.getRef('portfolioDescs.no_props', data.lang)
+                        : findAssets().map(asset => asset)
+                }`,
+                STOCKS: `${
+                    fields.length == 0 ? Lang.getRef('portfolioDescs.no_stocks', data.lang) : ''
+                }`,
+            }).addFields(...fields);
+            await InteractionUtils.send(intr, { embeds: [embed] });
         }
-
-        function findAssets(): string[] {
-            let assets = [];
-            user.properties.map(asset => {
-                assets.push(asset.name);
-            });
-            console.log(assets);
-            return assets;
-        }
-
-        let fields: any[] = await Promise.all(
-            user.stocks.map(async stock => {
-                let amount = await prismaUtils.getStock(stock.ticker);
-                if (amount != stock.currentPrice) {
-                    prisma.stock.update({
-                        where: {
-                            id: stock.id,
-                        },
-                        data: {
-                            currentPrice: amount,
-                        },
-                    });
-                }
-                return {
-                    name: `${stock.ticker}: ${stock.amount}x `,
-                    value: `**Worth: ** ${(stock.currentPrice * stock.amount).toFixed(2)}$ → ${(
-                        amount * stock.amount
-                    ).toFixed(2)}$`,
-                    inline: true,
-                };
-            })
-        );
-
-        nwCache[user.user_id] = user.balance + total;
-        console.log(nwCache);
-
-        let embed = Lang.getEmbed('displayEmbeds.portfolio', data.lang, {
-            MENTIONED_USER: `${args.option.username}`,
-            NET_WORTH: `${findTotal()}`,
-            CASH: `${user.balance}`,
-            PROPERTY: `${
-                findAssets().length == 0
-                    ? Lang.getRef('portfolioDescs.no_props', data.lang)
-                    : findAssets().map(asset => asset)
-            }`,
-            STOCKS: `${
-                fields.length == 0 ? Lang.getRef('portfolioDescs.no_stocks', data.lang) : ''
-            }`,
-        }).addFields(...fields);
-        await InteractionUtils.send(intr, { embeds: [embed] });
     }
 }
