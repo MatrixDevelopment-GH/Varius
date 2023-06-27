@@ -244,7 +244,7 @@
         "arguments": {
             "option": "option",
             "iq": "user",
-            "portfolio": "portfolio"
+            "portfolio": "user"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -272,6 +272,10 @@
             "lose": "You went bust! You lose.",
             "tie": "It's a tie!",
             "win": "You won GG!"
+        },
+        "portfolioDescs": {
+            "no_props": "No Properties under their name",
+            "no_stocks": "No Stocks under their name"
         },
         "fields": {
             "commands": "Commands",

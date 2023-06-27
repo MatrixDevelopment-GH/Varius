@@ -12,6 +12,16 @@ datasource db {
   // url = "mongodb+srv://Varius:FrvHuT3cfV2Pf8Or@cluster0.r60108c.mongodb.net/"
 }
 
+model User {
+  id          String   @id @default(uuid()) @map("_id") // The ID of this database entry
+  user_id     String   @unique // The ID of the Discord User
+  createdAt   DateTime @default(now()) // The time of creation
+  editedAt    DateTime @updatedAt // The last time of updating
+  balance     Float    @default(1000) // The balance of the player in cash
+  stocks      Stock[]  // Stocks of players
+  properties  Asset[]  // Properties of players
+}
+
 model Asset {
   id        String   @id @default(uuid()) @map("_id") // The ID of the database entry
   name      String   // Name of the property
@@ -20,11 +30,13 @@ model Asset {
   price     Float    // Price of the property
 }
 
-model User {
-  id        String   @id @default(uuid()) @map("_id") // The ID of this database entry
-  user_id   String   @unique // The ID of the Discord User
-  createdAt DateTime @default(now()) // The time of creation
-  editedAt  DateTime @updatedAt // The last time of updating
-  balance   Float    @default(1000) // The balance of the player in cash
-  properties Asset[]
+model Stock {
+  id           String   @id @default(uuid()) @map("_id") // The ID of the database entry
+  ticker       String // The ticker of the stock entry
+  createdAt    DateTime @default(now()) // The time of creation
+  editedAt     DateTime @updatedAt // The last time of updating
+  amount       Int // The quantity of the stock
+  user         User     @relation(references: [id], fields: [userId], onDelete: Cascade, onUpdate: Cascade) // The user which this stock belongs to
+  userId       String // The ID of the user this stock belongs to
+  currentPrice Float // The current price of the stock
 }
