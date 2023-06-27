@@ -26,10 +26,10 @@ export class BjCommand implements Command {
     // TODO: Add a betting system
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         let args = {
-            option: intr.options.getInteger('arguments.bj') ?? 50,
+            option: intr.options.getNumber('arguments.bj') ?? 50,
         };
-        console.log(intr.options.getInteger('arguments.bj'))
-        let betted = args.option;
+        console.log(intr.options.getNumber('arguments.bj'))
+        let betted: number = args.option;
         console.log(args.option);
 
         // Checks to see if user has account

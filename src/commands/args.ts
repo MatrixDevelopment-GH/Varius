@@ -1,7 +1,7 @@
 import {
     APIApplicationCommandBasicOption,
-    APIApplicationCommandUserOption,
     APIApplicationCommandNumberOption,
+    APIApplicationCommandUserOption,
     ApplicationCommandOptionType,
 } from 'discord.js';
 
