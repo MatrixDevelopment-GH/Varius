@@ -113,6 +113,15 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.delete'),
         dm_permission: false,
         default_member_permissions: undefined,
+    },
+    CREATE: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.create', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.create'),
+        description: Lang.getRef('commandDescs.create', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.create'),
+        dm_permission: false,
+        default_member_permissions: undefined,
     }
 };
 

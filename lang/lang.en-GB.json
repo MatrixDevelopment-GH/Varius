@@ -142,6 +142,10 @@
                 "title": "Purge {{STATUS}}",
                 "description": "{{MESSAGE}}"
             },
+            "accountCreated": {
+                "title": "A new account has been made for you!",
+                "description": "A new account has been made, and has a starter bundle of $1000."
+            },
             "accountNotCreated": {
                 "title": "Nonexistent",
                 "description": "Account Not Created! A new account has been made, and has a starter bundle of $1000."
@@ -149,6 +153,9 @@
             "accountNotFound": {
                 "title": "Account Not Found!",
                 "description": "Bro this guy doesn't even have an account"
+            },
+            "accountAlreadyExists": {
+                "title": "Account Already Exists!"
             },
             "portfolio": {
                 "title": "{{MENTIONED_USER}}'s portfolio",
@@ -241,7 +248,8 @@
             "iq": "iq",
             "purge": "purge",
             "portfolio": "portfolio",
-            "delete": "delete"
+            "delete": "delete",
+            "create": "create"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -263,7 +271,8 @@
             "iq": "Get the IQ of somebody.",
             "purge": "Delete multiple messages at once",
             "portfolio": "Look at how much money someone has.",
-            "delete": "Delete your account"
+            "delete": "Delete your account",
+            "create": "Create a new account for yourself"
         },
         "argDescs": {
             "helpOption": "Option.",

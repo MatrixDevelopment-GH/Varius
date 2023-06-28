@@ -6,7 +6,7 @@ import { Button } from './buttons/index.js';
 import { PurgeCommand } from './commands/administration/index.js';
 import { BjCommand } from './commands/casino/index.js';
 import { HelpCommand, InfoCommand, IqCommand, TestCommand } from './commands/chat/index.js';
-import { DeleteAccountCommand, PortfolioCommand  } from './commands/economy/index.js';
+import { CreateAccountCommand, DeleteAccountCommand, PortfolioCommand  } from './commands/economy/index.js';
 import {
     ChatCommandMetadata,
     Command,
@@ -67,6 +67,7 @@ async function start(): Promise<void> {
         new BjCommand(),
 
         // Economy Commands
+        new CreateAccountCommand(),
         new DeleteAccountCommand(),
         new PortfolioCommand(),
 
