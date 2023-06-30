@@ -35,8 +35,25 @@
                         "value": [
                             "To see the available commands, just type `/` and select the bot from the left side. You can then scroll through all available commands. Some commands may be hidden if you don't have permission to view them.",
                             "",
+                            "**Chat Commands**",
+                            "",
                             "{{CMD_LINK_TEST}} - {{REF:commandDescs.test}}",
-                            "{{CMD_LINK_INFO}} - {{REF:commandDescs.info}}"
+                            "{{CMD_LINK_INFO}} - {{REF:commandDescs.info}}",
+                            "{{CMD_LINK_PURGE}} - {{REF:commandDescs.purge}}",
+                            "",
+                            "**Economy Commands**",
+                            "",
+                            "{{CMD_LINK_CREATE}} - {{REF:commandDescs.create}}",
+                            "{{CMD_LINK_DELETE}} - {{REF:commandDescs.delete}}",
+                            "{{CMD_LINK_PORTFOLIO}} - {{REF:commandDescs.portfolio}}",
+                            "",
+                            "**Casino Commands**",
+                            "",
+                            "{{CMD_LINK_BJ}} - {{REF:commandDescs.bj}}",
+                            "",
+                            "**Fun & Memes**",
+                            "",
+                            "{{CMD_LINK_IQ}} - {{REF:commandDescs.iq}}"
                         ]
                     },
                     {
@@ -249,7 +266,8 @@
             "purge": "purge",
             "portfolio": "portfolio",
             "delete": "delete",
-            "create": "create"
+            "create": "create",
+            "work": "work"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -272,7 +290,8 @@
             "purge": "Delete multiple messages at once",
             "portfolio": "Look at how much money someone has.",
             "delete": "Delete your account",
-            "create": "Create a new account for yourself"
+            "create": "Create a new account for yourself",
+            "work": "Earn money"
         },
         "argDescs": {
             "helpOption": "Option.",

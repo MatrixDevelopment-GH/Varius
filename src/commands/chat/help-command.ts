@@ -38,6 +38,42 @@ export class HelpCommand implements Command {
                             Lang.getRef('chatCommands.info', Language.Default)
                         )
                     ),
+                    CMD_LINK_PURGE: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.purge', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_CREATE: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.create', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_DELETE: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.delete', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_PORTFOLIO: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.portfolio', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_BJ: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.bj', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_IQ: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.iq', Language.Default)
+                        )
+                    ),
                 });
                 break;
             }
