@@ -17,7 +17,10 @@ export class PurgeCommand implements Command {
         const e = intr;
         const eeeee = InteractionUtils;
 
-        const ee = e['options']['getInteger']('amount') || 1;
+        let args = {
+            option: e.options.getNumber(Lang.getRef('arguments.purge', data.lang)),
+        };
+        let ee = args.option ?? 1;
 
         if (ee <= 0) {
             let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
@@ -25,16 +28,17 @@ export class PurgeCommand implements Command {
             });
             await eeeee.send(e, embed);
             return;
+        } else {
+            await e.channel.bulkDelete(ee, true).then(async function sendEmbed() {
+                const eee = ee === 1 ? 'message' : 'messages';
+                let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
+                    STATUS: Lang.getRef('purgeDescs.success', data.lang, {
+                        EE: `${ee}`,
+                        EEE: `${eee}`,
+                    }),
+                });
+                await eeeee.send(e, embed);
+            });
         }
-        e['channel']['bulkDelete'](ee, true);
-
-        const eee = ee === 1 ? 'message' : 'messages';
-        let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
-            STATUS: Lang.getRef('purgeDescs.success', data.lang, {
-                EE: `${ee}`,
-                EEE: `${eee}`,
-            }),
-        });
-        await eeeee.send(e, embed);
     }
 }

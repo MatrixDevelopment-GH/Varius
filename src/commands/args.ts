@@ -31,6 +31,13 @@ export class Args {
         description_localizations: Lang.getRefLocalizationMap('argDescs.bjOption'),
         type: ApplicationCommandOptionType.Number,
     };
+    public static readonly PURGE_OPTION: APIApplicationCommandNumberOption = {
+        name: Lang.getRef('arguments.purge', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.purge'),
+        description: Lang.getRef('argDescs.purgeOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.purgeOption'),
+        type: ApplicationCommandOptionType.Number,
+    };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.option', Language.Default),
         name_localizations: Lang.getRefLocalizationMap('arguments.option'),

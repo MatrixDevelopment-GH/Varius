@@ -63,8 +63,8 @@ export const ChatCommandMetadata: {
             {
                 ...Args.BJ_OPTION,
                 required: false,
-            }
-        ]
+            },
+        ],
     },
     IQ: {
         type: ApplicationCommandType.ChatInput,
@@ -89,6 +89,12 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.purge'),
         dm_permission: false,
         default_member_permissions: `${PermissionsBitField.Flags.Administrator}`,
+        options: [
+            {
+                ...Args.PURGE_OPTION,
+                required: false,
+            },
+        ],
     },
     PORTFOLIO: {
         type: ApplicationCommandType.ChatInput,
@@ -122,7 +128,7 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.create'),
         dm_permission: false,
         default_member_permissions: undefined,
-    }
+    },
 };
 
 export const MessageCommandMetadata: {

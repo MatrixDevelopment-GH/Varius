@@ -11,7 +11,7 @@ import { DealerPlay, Deck } from '../../jobs/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
-import { InteractionUtils, prisma } from '../../utils/index.js';
+import { ClientUtils, FormatUtils, InteractionUtils, prisma } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
 const deck = new Deck();
@@ -23,14 +23,11 @@ export class BjCommand implements Command {
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
 
-    // TODO: Add a betting system
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         let args = {
-            option: intr.options.getNumber('arguments.bj') ?? 50,
+            option: intr.options.getNumber(Lang.getRef('arguments.bj', data.lang)),
         };
-        console.log(intr.options.getNumber('arguments.bj'))
-        let betted: number = args.option;
-        console.log(args.option);
+        let betted = args.option ?? 50;
 
         // Checks to see if user has account
         const id = intr.user.id;
@@ -48,6 +45,19 @@ export class BjCommand implements Command {
             });
             await InteractionUtils.send(intr, {
                 embeds: [Lang.getEmbed('displayEmbeds.accountNotCreated', data.lang)],
+            });
+        } else if (user.balance == 0) {
+            await InteractionUtils.send(intr, {
+                embeds: [
+                    Lang.getEmbed('displayEmbeds.noBalance', data.lang, {
+                        WORK: FormatUtils.commandMention(
+                            await ClientUtils.findAppCommand(
+                                intr.client,
+                                Lang.getRef('chatCommands.test', Language.Default)
+                            )
+                        ),
+                    }),
+                ],
             });
         } else {
             // The initial hand of both the player & the dealer

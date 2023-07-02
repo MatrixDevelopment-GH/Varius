@@ -194,6 +194,10 @@
             },
             "delete": {
                 "description": "account deleted."
+            },
+            "noBalance": {
+                "title": "No more money left!",
+                "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash"
             }
         },
         "validationEmbeds": {
@@ -279,7 +283,8 @@
             "option": "option",
             "iq": "user",
             "portfolio": "user",
-            "bj": "bet"
+            "bj": "bet",
+            "purge": "messages"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -298,7 +303,8 @@
             "infoOption": "Option.",
             "iqOption": "Option.",
             "portOption": "Option.",
-            "bjOption": "Bet. default: $50"
+            "bjOption": "Bet. default: $50",
+            "purgeOption": "How many messages u wanna delete"
         },
         "purgeDescs": {
             "error": "Seriously? You expect me to delete 0 messages? Get real!",

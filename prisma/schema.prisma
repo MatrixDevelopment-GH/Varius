@@ -18,6 +18,7 @@ model User {
   createdAt   DateTime @default(now()) // The time of creation
   editedAt    DateTime @updatedAt // The last time of updating
   balance     Float    @default(1000) // The balance of the player in cash
+  job         String   @default("None") // The player's job
   stocks      Stock[]  // Stocks of players
   properties  Asset[]  // Properties of players
 }
