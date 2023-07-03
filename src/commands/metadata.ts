@@ -129,6 +129,24 @@ export const ChatCommandMetadata: {
         dm_permission: false,
         default_member_permissions: undefined,
     },
+    WORK: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.work', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.work'),
+        description: Lang.getRef('commandDescs.work', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.work'),
+        dm_permission: false,
+        default_member_permissions: undefined,
+    },
+    JOB: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.job', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.job'),
+        description: Lang.getRef('commandDescs.job', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.job'),
+        dm_permission: false,
+        default_member_permissions: undefined,
+    },
 };
 
 export const MessageCommandMetadata: {

@@ -46,6 +46,8 @@
                             "{{CMD_LINK_CREATE}} - {{REF:commandDescs.create}}",
                             "{{CMD_LINK_DELETE}} - {{REF:commandDescs.delete}}",
                             "{{CMD_LINK_PORTFOLIO}} - {{REF:commandDescs.portfolio}}",
+                            "{{CMD_LINK_JOB}} - {{REF:commandDescs.job}}",
+                            "{{CMD_LINK_WORK}} - {{REF:commandDescs.work}}",
                             "",
                             "**Casino Commands**",
                             "",
@@ -53,7 +55,8 @@
                             "",
                             "**Fun & Memes**",
                             "",
-                            "{{CMD_LINK_IQ}} - {{REF:commandDescs.iq}}"
+                            "{{CMD_LINK_IQ}} - {{REF:commandDescs.iq}}",
+                            ""
                         ]
                     },
                     {
@@ -198,6 +201,16 @@
             "noBalance": {
                 "title": "No more money left!",
                 "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash"
+            },
+            "work": {
+                "title": "Work - {{JOB}}",
+                "description": "You just recieved ${{SALARY}} for working - {{STATUS}}"
+            },
+            "noJob": {
+                "title": "Bro you don't have a job, get one by running {{JOB_CMD}}"
+            },
+            "job": {
+                "title": "u get a job here bich"
             }
         },
         "validationEmbeds": {
@@ -271,7 +284,8 @@
             "portfolio": "portfolio",
             "delete": "delete",
             "create": "create",
-            "work": "work"
+            "work": "work",
+            "job": "job"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -296,7 +310,8 @@
             "portfolio": "Look at how much money someone has.",
             "delete": "Delete your account",
             "create": "Create a new account for yourself",
-            "work": "Earn money"
+            "work": "Earn money",
+            "job": "Find a job"
         },
         "argDescs": {
             "helpOption": "Option.",

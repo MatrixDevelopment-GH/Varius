@@ -74,6 +74,18 @@ export class HelpCommand implements Command {
                             Lang.getRef('chatCommands.iq', Language.Default)
                         )
                     ),
+                    CMD_LINK_JOB: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.job', Language.Default)
+                        )
+                    ),
+                    CMD_LINK_WORK: FormatUtils.commandMention(
+                        await ClientUtils.findAppCommand(
+                            intr.client,
+                            Lang.getRef('chatCommands.work', Language.Default)
+                        )
+                    ),
                 });
                 break;
             }
