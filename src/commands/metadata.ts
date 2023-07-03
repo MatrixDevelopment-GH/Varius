@@ -96,6 +96,29 @@ export const ChatCommandMetadata: {
             },
         ],
     },
+    ADDSUBMONEY: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.addsubMoney', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.addsubMoney'),
+        description: Lang.getRef('commandDescs.addsubMoney', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.addsubMoney'),
+        dm_permission: false,
+        default_member_permissions: `${PermissionsBitField.Flags.Administrator}`,
+        options: [
+            {
+                ...Args.MONEY_OPTION,
+                required: true,
+            },
+            {
+                ...Args.MONEY_USER_OPTION,
+                required: true,
+            },
+            {
+                ...Args.MONEY_NUMBER_OPTION,
+                required: true,
+            },
+        ],
+    },
     PORTFOLIO: {
         type: ApplicationCommandType.ChatInput,
         name: Lang.getRef('chatCommands.portfolio', Language.Default),

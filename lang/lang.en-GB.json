@@ -211,6 +211,12 @@
             },
             "job": {
                 "title": "u get a job here bich"
+            },
+            "addCash": {
+                "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account."
+            },
+            "subCash": {
+                "description": "taken ${{CASH}} from {{MENTIONED_USER}}'s account."
             }
         },
         "validationEmbeds": {
@@ -285,7 +291,8 @@
             "delete": "delete",
             "create": "create",
             "work": "work",
-            "job": "job"
+            "job": "job",
+            "addsubMoney": "add_money"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
@@ -298,7 +305,9 @@
             "iq": "user",
             "portfolio": "user",
             "bj": "bet",
-            "purge": "messages"
+            "purge": "messages",
+            "cash": "cash",
+            "cashUser": "user"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -306,12 +315,13 @@
             "test": "Run the test command.",
             "bj": "Play a game of Blackjack!",
             "iq": "Get the IQ of somebody.",
-            "purge": "Delete multiple messages at once",
+            "purge": "Delete multiple messages at once (admin)",
             "portfolio": "Look at how much money someone has.",
             "delete": "Delete your account",
             "create": "Create a new account for yourself",
             "work": "Earn money",
-            "job": "Find a job"
+            "job": "Find a job",
+            "addsubMoney": "add/take out money to someone's account (admin)"
         },
         "argDescs": {
             "helpOption": "Option.",
@@ -319,7 +329,10 @@
             "iqOption": "Option.",
             "portOption": "Option.",
             "bjOption": "Bet. default: $50",
-            "purgeOption": "How many messages u wanna delete"
+            "purgeOption": "How many messages u wanna delete",
+            "moneyOption": "Option.",
+            "addsubMoneyOption": "How much money you wanna give/take",
+            "cashUserOption": "the user"
         },
         "purgeDescs": {
             "error": "Seriously? You expect me to delete 0 messages? Get real!",
@@ -344,6 +357,10 @@
         "fields": {
             "commands": "Commands",
             "links": "Links"
+        },
+        "cashOptionDescs": {
+            "add": "add cash to someone's account",
+            "sub": "take out cash from someone's account"
         },
         "permissions": {
             "AddReactions": "Add Reactions",

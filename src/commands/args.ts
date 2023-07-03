@@ -5,7 +5,7 @@ import {
     ApplicationCommandOptionType,
 } from 'discord.js';
 
-import { HelpOption, InfoOption } from '../enums/index.js';
+import { HelpOption, InfoOption, MoneyOption } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
 
@@ -36,6 +36,39 @@ export class Args {
         name_localizations: Lang.getRefLocalizationMap('arguments.purge'),
         description: Lang.getRef('argDescs.purgeOption', Language.Default),
         description_localizations: Lang.getRefLocalizationMap('argDescs.purgeOption'),
+        type: ApplicationCommandOptionType.Number,
+    };
+    public static readonly MONEY_OPTION: APIApplicationCommandBasicOption = {
+        name: Lang.getRef('arguments.option', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.option'),
+        description: Lang.getRef('argDescs.moneyOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.moneyOption'),
+        type: ApplicationCommandOptionType.String,
+        choices: [
+            {
+                name: Lang.getRef('cashOptionDescs.add', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('cashOptionDescs.add'),
+                value: MoneyOption.ADDCASH,
+            },
+            {
+                name: Lang.getRef('cashOptionDescs.sub', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('cashOptionDescs.sub'),
+                value: MoneyOption.SUBTRACTCASH,
+            },
+        ],
+    };
+    public static readonly MONEY_USER_OPTION: APIApplicationCommandUserOption = {
+        name: Lang.getRef('arguments.cashUser', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.cashUser'),
+        description: Lang.getRef('argDescs.cashUserOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.cashUserOption'),
+        type: ApplicationCommandOptionType.User,
+    };
+    public static readonly MONEY_NUMBER_OPTION: APIApplicationCommandNumberOption = {
+        name: Lang.getRef('arguments.cash', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.cash'),
+        description: Lang.getRef('argDescs.addsubMoneyOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.addsubMoneyOption'),
         type: ApplicationCommandOptionType.Number,
     };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {

@@ -29,7 +29,8 @@ export class PurgeCommand implements Command {
             await eeeee.send(e, embed);
             return;
         } else {
-            await e.channel.bulkDelete(ee, true).then(async function sendEmbed() {
+            await e.channel.bulkDelete(ee, true);
+            async function sendEmbed(): Promise<void> {
                 const eee = ee === 1 ? 'message' : 'messages';
                 let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
                     STATUS: Lang.getRef('purgeDescs.success', data.lang, {
@@ -38,7 +39,8 @@ export class PurgeCommand implements Command {
                     }),
                 });
                 await eeeee.send(e, embed);
-            });
+            }
+            sendEmbed();
         }
     }
 }

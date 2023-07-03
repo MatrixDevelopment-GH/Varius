@@ -3,15 +3,15 @@ import { Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
 
 import { Button } from './buttons/index.js';
-import { PurgeCommand } from './commands/administration/index.js';
+import { PurgeCommand, AddOrSubMoneyCommand } from './commands/administration/index.js';
 import { BjCommand } from './commands/casino/index.js';
 import { HelpCommand, InfoCommand, IqCommand, TestCommand } from './commands/chat/index.js';
 import {
     CreateAccountCommand,
     DeleteAccountCommand,
+    JobCommand,
     PortfolioCommand,
     WorkCommand,
-    JobCommand,
 } from './commands/economy/index.js';
 import {
     ChatCommandMetadata,
@@ -84,6 +84,7 @@ async function start(): Promise<void> {
 
         // Admin/Moderator Commands
         new PurgeCommand(),
+        new AddOrSubMoneyCommand(),
 
         // Message Context Commands
         new ViewDateSent(),
