@@ -59,7 +59,7 @@ export class PortfolioCommand implements Command {
                 total += user.balance;
                 return total;
             }
-    
+
             function findAssets(): string[] {
                 let assets = [];
                 user.properties.map(asset => {
@@ -67,7 +67,7 @@ export class PortfolioCommand implements Command {
                 });
                 return assets;
             }
-    
+
             let fields: any[] = await Promise.all(
                 user.stocks.map(async stock => {
                     let amount = await prismaUtils.getStock(stock.ticker);
@@ -90,11 +90,11 @@ export class PortfolioCommand implements Command {
                     };
                 })
             );
-    
+
             nwCache[user.user_id] = user.balance + total;
-    
+
             let embed = Lang.getEmbed('displayEmbeds.portfolio', data.lang, {
-                MENTIONED_USER: `${args.option.username}`,
+                MENTIONED_USER: `${args.option}`,
                 NET_WORTH: `${findTotal()}`,
                 CASH: `${user.balance}`,
                 PROPERTY: `${
