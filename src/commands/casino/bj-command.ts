@@ -27,8 +27,6 @@ export class BjCommand implements Command {
         let args = {
             option: intr.options.getNumber(Lang.getRef('arguments.bj', data.lang)),
         };
-        let betted = args.option ?? 50;
-
         // Checks to see if user has account
         const id = intr.user.id;
         let user = await prisma.user.findUnique({
@@ -36,6 +34,16 @@ export class BjCommand implements Command {
                 user_id: id,
             },
         });
+        let betted = args.option ?? 50;
+        if (betted > user.balance) {
+            betted = user.balance;
+            await InteractionUtils.send(
+                intr,
+                Lang.getEmbed('displayEmbeds.betTooMuch', data.lang, {
+                    BETTED: `${user.balance}`,
+                })
+            );
+        }
 
         if (!user) {
             await prisma.user.create({
@@ -91,10 +99,9 @@ export class BjCommand implements Command {
                 .setCustomId('double')
                 .setLabel(Lang.getRef('bjOptions.double', Language.Default))
                 .setStyle(ButtonStyle.Danger)
-                .setDisabled(deck.getHandValueBj(playerCards) > 15);
+                .setDisabled(deck.getHandValueBj(playerCards) > 15 ? true : false);
             const row: ActionRowBuilder<ButtonBuilder> =
                 new ActionRowBuilder<ButtonBuilder>().addComponents(double, hit, stand);
-
             await InteractionUtils.send(intr, { embeds: [embed], components: [row] });
 
             const filter: any = i => i.user.id === intr.user.id;
@@ -115,7 +122,7 @@ export class BjCommand implements Command {
                             doubled >= 5 ||
                             betted * 2 >= user.balance
                         ) {
-                            row[0].setDisabled(true);
+                            row.components[0].setDisabled(true);
                         }
                         embed.setDescription(
                             `${Lang.getRef('bjDescs.bet', data.lang, {

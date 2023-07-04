@@ -205,6 +205,10 @@
             "bet_error": {
                 "title": "You betted less than $0!"
             },
+            "betTooMuch": {
+                "title": "You betted too much!",
+                "description": "Adjusted bets to ${{BETTED}}"
+            },
             "work": {
                 "title": "Work - {{JOB}}",
                 "description": "You just recieved ${{SALARY}} for working - {{STATUS}}"

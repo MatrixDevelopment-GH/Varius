@@ -16,6 +16,10 @@ export class JobCommand implements Command {
     public requireClientPerms: PermissionsString[] = [];
 
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
+        let args = {
+            option: intr.options.getString(Lang.getRef('arguments.option', data.lang)) as JobOption,
+        };
+        console.log(args.option);
         let user = await prisma.user.findUnique({
             where: {
                 user_id: intr.user.id,
