@@ -5,7 +5,7 @@ import {
     ApplicationCommandOptionType,
 } from 'discord.js';
 
-import { HelpOption, InfoOption, MoneyOption } from '../enums/index.js';
+import { HelpOption, InfoOption, JobOption, MoneyOption } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
 
@@ -70,6 +70,25 @@ export class Args {
         description: Lang.getRef('argDescs.addsubMoneyOption', Language.Default),
         description_localizations: Lang.getRefLocalizationMap('argDescs.addsubMoneyOption'),
         type: ApplicationCommandOptionType.Number,
+    };
+    public static readonly JOB_OPTION: APIApplicationCommandBasicOption = {
+        name: Lang.getRef('arguments.option', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.option'),
+        description: Lang.getRef('argDescs.jobOption', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.jobOption'),
+        type: ApplicationCommandOptionType.String,
+        choices: [
+            {
+                name: Lang.getRef('jobOptionDescs.apply', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('jobOptionDescs.apply'),
+                value: JobOption.APPLY,
+            },
+            {
+                name: Lang.getRef('jobOptionDescs.list', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('jobOptionDescs.list'),
+                value: JobOption.LIST,
+            },
+        ],
     };
     public static readonly HELP_OPTION: APIApplicationCommandBasicOption = {
         name: Lang.getRef('arguments.option', Language.Default),

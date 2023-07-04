@@ -94,7 +94,7 @@ export class PortfolioCommand implements Command {
             nwCache[user.user_id] = user.balance + total;
 
             let embed = Lang.getEmbed('displayEmbeds.portfolio', data.lang, {
-                MENTIONED_USER: `${args.option}`,
+                MENTIONED_USER: `${args.option.username}`,
                 NET_WORTH: `${findTotal()}`,
                 CASH: `${user.balance}`,
                 PROPERTY: `${

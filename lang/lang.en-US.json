@@ -202,6 +202,9 @@
                 "title": "No more money left!",
                 "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash"
             },
+            "bet_error": {
+                "title": "You betted less than $0!"
+            },
             "work": {
                 "title": "Work - {{JOB}}",
                 "description": "You just recieved ${{SALARY}} for working - {{STATUS}}"
@@ -211,6 +214,12 @@
             },
             "job": {
                 "title": "u get a job here bich"
+            },
+            "jobList": {
+                "title": "list of jobs"
+            },
+            "jobApply": {
+                "title": "applying for sth"
             },
             "addCash": {
                 "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account."
@@ -294,6 +303,20 @@
             "job": "job",
             "addsubMoney": "add_money"
         },
+        "commandDescs": {
+            "help": "Find help or contact support.",
+            "info": "View bot info.",
+            "test": "Run the test command.",
+            "bj": "Play a game of Blackjack!",
+            "iq": "Get the IQ of somebody.",
+            "purge": "Delete multiple messages at once (admin)",
+            "portfolio": "Look at how much money someone has.",
+            "delete": "Delete your account",
+            "create": "Create a new account for yourself",
+            "work": "Earn money",
+            "job": "Find a job",
+            "addsubMoney": "add/take out money to someone's account (admin)"
+        },
         "userCommands": {
             "viewDateJoined": "View Date Joined"
         },
@@ -309,20 +332,6 @@
             "cash": "cash",
             "cashUser": "user"
         },
-        "commandDescs": {
-            "help": "Find help or contact support.",
-            "info": "View bot info.",
-            "test": "Run the test command.",
-            "bj": "Play a game of Blackjack!",
-            "iq": "Get the IQ of somebody.",
-            "purge": "Delete multiple messages at once (admin)",
-            "portfolio": "Look at how much money someone has.",
-            "delete": "Delete your account",
-            "create": "Create a new account for yourself",
-            "work": "Earn money",
-            "job": "Find a job",
-            "addsubMoney": "add/take out money to someone's account (admin)"
-        },
         "argDescs": {
             "helpOption": "Option.",
             "infoOption": "Option.",
@@ -332,7 +341,8 @@
             "purgeOption": "How many messages u wanna delete",
             "moneyOption": "Option.",
             "addsubMoneyOption": "How much money you wanna give/take",
-            "cashUserOption": "the user"
+            "cashUserOption": "the user",
+            "jobOption": "Option."
         },
         "purgeDescs": {
             "error": "Seriously? You expect me to delete 0 messages? Get real!",
@@ -361,6 +371,10 @@
         "cashOptionDescs": {
             "add": "add cash to someone's account",
             "sub": "take out cash from someone's account"
+        },
+        "jobOptionDescs": {
+            "apply": "Apply for a job",
+            "list": "List all jobs available"
         },
         "permissions": {
             "AddReactions": "Add Reactions",

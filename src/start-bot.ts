@@ -3,7 +3,7 @@ import { Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
 
 import { Button } from './buttons/index.js';
-import { PurgeCommand, AddOrSubMoneyCommand } from './commands/administration/index.js';
+import { AddOrSubMoneyCommand, PurgeCommand } from './commands/administration/index.js';
 import { BjCommand } from './commands/casino/index.js';
 import { HelpCommand, InfoCommand, IqCommand, TestCommand } from './commands/chat/index.js';
 import {

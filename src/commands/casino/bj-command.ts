@@ -59,6 +59,10 @@ export class BjCommand implements Command {
                     }),
                 ],
             });
+        } else if (betted < 0) {
+            await InteractionUtils.send(intr, {
+                embeds: [Lang.getEmbed('displayEmbeds.bet_error', data.lang)],
+            });
         } else {
             // The initial hand of both the player & the dealer
             const playerCards = [deck.drawCard(), deck.drawCard()];
@@ -87,7 +91,7 @@ export class BjCommand implements Command {
                 .setCustomId('double')
                 .setLabel(Lang.getRef('bjOptions.double', Language.Default))
                 .setStyle(ButtonStyle.Danger)
-                .setDisabled(deck.getHandValueBj(playerCards) > 16);
+                .setDisabled(deck.getHandValueBj(playerCards) > 15);
             const row: ActionRowBuilder<ButtonBuilder> =
                 new ActionRowBuilder<ButtonBuilder>().addComponents(double, hit, stand);
 
@@ -106,7 +110,11 @@ export class BjCommand implements Command {
                         doubled += 1;
                         betted *= 2;
                         console.log(betted);
-                        if (deck.getHandValueBj(playerCards) > 15 || doubled >= 5) {
+                        if (
+                            deck.getHandValueBj(playerCards) > 15 ||
+                            doubled >= 5 ||
+                            betted * 2 >= user.balance
+                        ) {
                             row[0].setDisabled(true);
                         }
                         embed.setDescription(

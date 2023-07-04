@@ -17,28 +17,28 @@ export class PurgeCommand implements Command {
         const e = intr;
         const eeeee = InteractionUtils;
 
-        let args = {
-            option: e.options.getNumber(Lang.getRef('arguments.purge', data.lang)),
+        let eeeeee = {
+            ee: e.options.getNumber(Lang.getRef('arguments.purge', data.lang)),
         };
-        let ee = args.option ?? 1;
+        let ee = eeeeee.ee ?? 1;
 
         if (ee <= 0) {
-            let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
+            let eeeeeee = Lang.getEmbed('displayEmbeds.purge', data.lang, {
                 STATUS: Lang.getRef('purgeDescs.error', data.lang),
             });
-            await eeeee.send(e, embed);
+            await eeeee.send(e, eeeeeee);
             return;
         } else {
             await e.channel.bulkDelete(ee, true);
             async function sendEmbed(): Promise<void> {
                 const eee = ee === 1 ? 'message' : 'messages';
-                let embed = Lang.getEmbed('displayEmbeds.purge', data.lang, {
+                let eeeeeee = Lang.getEmbed('displayEmbeds.purge', data.lang, {
                     STATUS: Lang.getRef('purgeDescs.success', data.lang, {
                         EE: `${ee}`,
                         EEE: `${eee}`,
                     }),
                 });
-                await eeeee.send(e, embed);
+                await eeeee.send(e, eeeeeee);
             }
             sendEmbed();
         }

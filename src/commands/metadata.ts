@@ -169,6 +169,12 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.job'),
         dm_permission: false,
         default_member_permissions: undefined,
+        options: [
+            {
+                ...Args.JOB_OPTION,
+                required: true,
+            },
+        ],
     },
 };
 

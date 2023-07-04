@@ -28,9 +28,9 @@ export class Deck {
             },
         });
         let balance = user.balance;
-        status == 2 ? balance += bet : status == 0 ? balance -= bet : balance
+        status == 2 ? (balance += bet) : status == 0 ? (balance -= bet) : balance;
         if (status == 0) {
-            console.log("status 0")
+            console.log('status 0');
             await prisma.user.update({
                 where: {
                     user_id: userId,
@@ -40,7 +40,7 @@ export class Deck {
                 },
             });
         } else if (status == 2) {
-            console.log("status 2")
+            console.log('status 2');
             await prisma.user.update({
                 where: {
                     user_id: userId,
@@ -105,12 +105,12 @@ export class Deck {
         data: any
     ): Promise<void> {
         let desc = '';
-        status == 0 ? desc = 'loseBets' : status == 1 ? desc = 'tieBets' : desc = 'winBets'
+        status == 0 ? (desc = 'loseBets') : status == 1 ? (desc = 'tieBets') : (desc = 'winBets');
         function field(): any {
             return {
                 name: 'Cash',
                 value: Lang.getRef(`bjDescs.${desc}`, data, {
-                    BET: `${betted}`
+                    BET: `${betted}`,
                 }),
                 inline: true,
             };
