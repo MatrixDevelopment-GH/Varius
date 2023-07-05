@@ -44,11 +44,15 @@ export class JobCommand implements Command {
                     .setMaxValues(1)
                     .addOptions(
                         new StringSelectMenuOptionBuilder()
+                            .setEmoji("889984011865292800")
                             .setLabel(Lang.getRef('jobDescs.cashier', data.lang))
                             .setValue(Lang.getRef('jobDescs.cashier', data.lang))
                     )
                     .addOptions(
-                        new StringSelectMenuOptionBuilder().setLabel('yes').setValue('yes')
+                        new StringSelectMenuOptionBuilder()
+                            .setEmoji('1114545433948213288')
+                            .setLabel(Lang.getRef('jobDescs.janitor', data.lang))
+                            .setValue(Lang.getRef('jobDescs.janitor', data.lang))
                     );
                 const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(select);
                 await InteractionUtils.send(intr, {

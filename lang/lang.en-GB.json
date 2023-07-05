@@ -364,7 +364,8 @@
             "tieBets": "You tied!"
         },
         "jobDescs": {
-            "cashier": "Cashier"
+            "cashier": "Cashier",
+            "janitor": "Janitor"
         },
         "portfolioDescs": {
             "no_props": "No Properties under their name",
