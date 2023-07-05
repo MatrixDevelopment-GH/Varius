@@ -216,14 +216,13 @@
             "noJob": {
                 "title": "Bro you don't have a job, get one by running {{JOB_CMD}}"
             },
-            "job": {
-                "title": "u get a job here bich"
-            },
             "jobList": {
-                "title": "list of jobs"
+                "title": "List",
+                "description": "Browse the list of jobs here! To apply, rerun the command and select 'Apply'"
             },
             "jobApply": {
-                "title": "applying for sth"
+                "title": "Apply",
+                "description": "Apply your job here! To browse all jobs available, rerun the command and select 'List'"
             },
             "addCash": {
                 "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account."
@@ -363,6 +362,9 @@
             "loseBets": "You lose ${{BET}} from the blackjack game!",
             "winBets": "You won ${{BET}} from the blackjack game!",
             "tieBets": "You tied!"
+        },
+        "jobDescs": {
+            "cashier": "cashier"
         },
         "portfolioDescs": {
             "no_props": "No Properties under their name",
