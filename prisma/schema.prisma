@@ -26,9 +26,9 @@ model User {
 model Job {
   id        String   @id @default(uuid()) @map("_id")
   name      String   // job name
-  salary    Int      @default(0) // job salary
+  salary    Int      // job salary
   time      Int      // amount of hours needed for the job
-  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade, onUpdate: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId    String   @unique // The ID of the user this asset belongs to
 }
 

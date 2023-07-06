@@ -111,7 +111,7 @@ export class BjCommand implements Command {
             });
 
             collector.on('collect', async i => {
-                i.deferReply()
+                i.deferUpdate();
                 let doubled = 0;
                 switch (i.customId) {
                     case 'double':

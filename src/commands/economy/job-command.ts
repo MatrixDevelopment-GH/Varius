@@ -42,6 +42,10 @@ export class JobCommand implements Command {
             await InteractionUtils.send(intr, {
                 embeds: [Lang.getEmbed('displayEmbeds.accountNotCreated', data.lang)],
             });
+        } else if (user.job != null) {
+            await InteractionUtils.send(intr, {
+                embeds: [Lang.getEmbed('displayEmbeds.hasJob', data.lang)],
+            });
         } else {
             switch (args.option) {
                 case 'APPLY':
@@ -78,27 +82,43 @@ export class JobCommand implements Command {
                     });
                     // FIXME: BUG
                     collector.on('collect', async i => {
-                        i.deferReply();
+                        i.deferUpdate();
                         if (i.customId == 'job') {
                             const jobArray = Object.keys(JOB_NAMES);
                             for (const job of jobArray) {
                                 if (i.values[0] == JOB_NAMES[job]) {
-                                    // fix da bug
-                                    await prisma.user.update({
-                                        where: {
-                                            user_id: intr.user.id,
-                                        },
+                                    collector.stop();
+                                    console.log(`${JOB_NAMES[job]} ${SALARY[job]} ${TIME[job]}`);
+                                    await prisma.job.create({
                                         data: {
-                                            job: {
-                                                create: {
-                                                    name: `${JOB_NAMES[job]}`,
-                                                    salary: SALARY[job],
-                                                    time: TIME[job],
+                                            name: `${JOB_NAMES[job]}`,
+                                            salary: SALARY[job],
+                                            time: TIME[job],
+                                            user: {
+                                                connectOrCreate: {
+                                                    where: {
+                                                        user_id: intr.user.id,
+                                                    },
+                                                    create: {
+                                                        user_id: intr.user.id,
+                                                    },
                                                 },
                                             },
                                         },
+                                        include: {
+                                            user: true,
+                                        },
                                     });
-                                    await InteractionUtils.send(intr, job);
+                                    await InteractionUtils.send(
+                                        intr,
+                                        Lang.getEmbed(
+                                            'displayEmbeds.jobAppliedSuccess',
+                                            data.lang,
+                                            {
+                                                JOB: `${JOB_NAMES[job]}`,
+                                            }
+                                        )
+                                    );
                                 }
                             }
                         }

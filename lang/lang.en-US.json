@@ -186,6 +186,10 @@
                         "value": "{{CASH}}"
                     },
                     {
+                        "name": "Job",
+                        "value": "{{JOB}} {{SALARY}}"
+                    },
+                    {
                         "name": "Properties",
                         "value": "{{PROPERTY}}"
                     },
@@ -200,14 +204,21 @@
             },
             "noBalance": {
                 "title": "No more money left!",
-                "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash"
+                "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash",
+                "color": "{{COM:colors.warning}}"
+            },
+            "hasJob": {
+                "description": "You have a job already! Quit from it first before re-applying!",
+                "color": "{{COM:colors.warning}}"
             },
             "bet_error": {
-                "title": "You betted less than $0!"
+                "title": "You betted less than $0!",
+                "color": "{{COM:colors.warning}}"
             },
             "betTooMuch": {
                 "title": "You betted too much!",
-                "description": "Adjusted bets to ${{BETTED}}"
+                "description": "Adjusted bets to ${{BETTED}}",
+                "color": "{{COM:colors.warning}}"
             },
             "work": {
                 "title": "Work - {{JOB}}",
@@ -223,6 +234,10 @@
             "jobApply": {
                 "title": "Apply",
                 "description": "Apply your job here! To browse all jobs available, rerun the command and select 'List'"
+            },
+            "jobAppliedSuccess": {
+                "title": "Success",
+                "description": "You have successfully applied for {{JOB}}."
             },
             "addCash": {
                 "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account."
@@ -369,7 +384,8 @@
         },
         "portfolioDescs": {
             "no_props": "No Properties under their name",
-            "no_stocks": "No Stocks under their name"
+            "no_stocks": "No Stocks under their name",
+            "no_job": "No Job"
         },
         "fields": {
             "commands": "Commands",

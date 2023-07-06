@@ -27,6 +27,7 @@ export class PortfolioCommand implements Command {
                 user_id: args.option.id,
             },
             include: {
+                job: true,
                 properties: true,
                 stocks: true,
             },
@@ -97,6 +98,18 @@ export class PortfolioCommand implements Command {
                 MENTIONED_USER: `${args.option.username}`,
                 NET_WORTH: `${findTotal()}`,
                 CASH: `${user.balance}`,
+                JOB: `${
+                    user.job == null
+                        ? Lang.getRef('portfolioDescs.no_job', data.lang)
+                        : user.job.name
+                }`,
+                SALARY: `${
+                    user.job == null
+                        ? ''
+                        : `($${user.job.salary} per ${user.job.time} ${
+                              user.job.time <= 1 ? 'hour' : 'hours'
+                          })`
+                }`,
                 PROPERTY: `${
                     findAssets().length == 0
                         ? Lang.getRef('portfolioDescs.no_props', data.lang)
