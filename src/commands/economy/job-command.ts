@@ -34,7 +34,7 @@ export class JobCommand implements Command {
                 job: true,
             },
         });
-        // TODO: FIX THE FUCKIN BUGS HERE
+        // FIXME: FIX THE FUCKIN BUGS HERE
         switch (args.option) {
             case 'APPLY':
                 const select = new StringSelectMenuBuilder()
@@ -44,7 +44,7 @@ export class JobCommand implements Command {
                     .setMaxValues(1)
                     .addOptions(
                         new StringSelectMenuOptionBuilder()
-                            .setEmoji("889984011865292800")
+                            .setEmoji('889984011865292800')
                             .setLabel(Lang.getRef('jobDescs.cashier', data.lang))
                             .setValue(Lang.getRef('jobDescs.cashier', data.lang))
                     )
