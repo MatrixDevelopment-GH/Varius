@@ -7,9 +7,10 @@ import { Lang } from '../../services/index.js';
 import { ClientUtils, FormatUtils, InteractionUtils, prisma } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
+// TODO: MAKE A DYNAMIC COOLDOWN SYSTEM
 export class WorkCommand implements Command {
     public names = [Lang.getRef('chatCommands.work', Language.Default)];
-    public cooldown = new RateLimiter(1, 5000);
+    public cooldown = new RateLimiter(1, 3 * 60 * 60 * 100);
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
 
