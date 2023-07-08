@@ -222,7 +222,8 @@
             },
             "work": {
                 "title": "Work - {{JOB}}",
-                "description": "You just recieved ${{SALARY}} for working - {{STATUS}}"
+                "description": "You just recieved ${{SALARY}} for working",
+                "color": "{{COM:colors.success}}"
             },
             "noJob": {
                 "title": "Bro you don't have a job, get one by running {{JOB_CMD}}"
@@ -237,13 +238,16 @@
             },
             "jobAppliedSuccess": {
                 "title": "Success",
-                "description": "You have successfully applied for {{JOB}}."
+                "description": "You have successfully applied for {{JOB}}.",
+                "color": "{{COM:colors.success}}"
             },
             "addCash": {
-                "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account."
+                "description": "added ${{CASH}} to {{MENTIONED_USER}}'s account.",
+                "color": "{{COM:colors.success}}"
             },
             "subCash": {
-                "description": "taken ${{CASH}} from {{MENTIONED_USER}}'s account."
+                "description": "taken ${{CASH}} from {{MENTIONED_USER}}'s account.",
+                "color": "{{COM:colors.success}}"
             }
         },
         "validationEmbeds": {

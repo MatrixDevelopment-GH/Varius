@@ -88,12 +88,12 @@ export class JobCommand implements Command {
                             for (const job of jobArray) {
                                 if (i.values[0] == JOB_NAMES[job]) {
                                     collector.stop();
-                                    console.log(`${JOB_NAMES[job]} ${SALARY[job]} ${TIME[job]}`);
                                     await prisma.job.create({
                                         data: {
                                             name: `${JOB_NAMES[job]}`,
                                             salary: SALARY[job],
                                             time: TIME[job],
+                                            required: 1,
                                             user: {
                                                 connectOrCreate: {
                                                     where: {

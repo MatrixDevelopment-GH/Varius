@@ -28,6 +28,7 @@ model Job {
   name      String   // job name
   salary    Int      // job salary
   time      Int      // amount of hours needed for the job
+  required  Int      // amount of times working required per day
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId    String   @unique // The ID of the user this asset belongs to
 }

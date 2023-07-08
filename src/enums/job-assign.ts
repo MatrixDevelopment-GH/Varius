@@ -9,6 +9,6 @@ export enum SALARY {
 }
 
 export enum TIME {
-    CASHIER = 3,
-    JANITOR = 3,
+    CASHIER = 40,
+    JANITOR = 40,
 }
