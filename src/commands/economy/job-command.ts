@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { RateLimiter } from 'discord.js-rate-limiter';
 
-import { JOB_NAMES, JobOption, SALARY, TIME } from '../../enums/index.js';
+import { JOB_NAMES, JobOption, REQ, SALARY, TIME } from '../../enums/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
@@ -88,12 +88,13 @@ export class JobCommand implements Command {
                             for (const job of jobArray) {
                                 if (i.values[0] == JOB_NAMES[job]) {
                                     collector.stop();
+
                                     await prisma.job.create({
                                         data: {
                                             name: `${JOB_NAMES[job]}`,
                                             salary: SALARY[job],
                                             time: TIME[job],
-                                            required: 1,
+                                            required: REQ[job],
                                             user: {
                                                 connectOrCreate: {
                                                     where: {

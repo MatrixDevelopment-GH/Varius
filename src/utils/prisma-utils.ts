@@ -25,6 +25,30 @@ export class PrismaUtils {
             return cache[ticker].value;
         }
     }
+
+    public async getUser(id: string): Promise<any> {
+        if (nwCache[id] && nwCache[id].lastUpdated - new Date().getTime() < 300000) {
+            return nwCache[id].value;
+        } else {
+            let user = await prisma.user.findUnique({
+                where: {
+                    user_id: id,
+                },
+                include: {
+                    job: true,
+                    properties: true,
+                    stocks: true,
+                },
+            });
+            if (user) {
+                y;
+                nwCache[id] = { lastUpdated: new Date().getTime(), value: user };
+                return nwCache[id].value;
+            } else {
+                return null;
+            }
+        }
+    }
 }
 
 export let cache = {};

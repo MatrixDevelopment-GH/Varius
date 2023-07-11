@@ -10,7 +10,7 @@ import { Command, CommandDeferType } from '../index.js';
 // TODO: MAKE A DYNAMIC COOLDOWN SYSTEM
 export class WorkCommand implements Command {
     public names = [Lang.getRef('chatCommands.work', Language.Default)];
-    public cooldown = new RateLimiter(1, 10800000);
+    public cooldown = new RateLimiter(1, 5000);
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
 
@@ -31,7 +31,7 @@ export class WorkCommand implements Command {
             salary = user.job !== null ? user.job.salary : 0;
             console.log(job);
             console.log(salary);
-            console.log(user.job.required);
+            console.log(user.job.required !== null ? user.job.required : 0);
             console.log(user.job.id);
         } else {
             console.log('User.Job is null or undefined.');
@@ -53,6 +53,19 @@ export class WorkCommand implements Command {
                 SALARY: `${salary}`,
             });
             let requiredReduction: number = user.job.required - 1 == 0 ? 2 : user.job.required - 1;
+            // Create a new Date object
+            let currentTime = new Date();
+
+            // Get the current hours and minutes
+            let hours = currentTime.getHours();
+            let minutes = currentTime.getMinutes();
+
+            // Format the time as HH:MM
+            let formattedTime =
+                hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+
+            console.log(formattedTime);
+
             console.log(requiredReduction);
             await prisma.user.update({
                 where: {
