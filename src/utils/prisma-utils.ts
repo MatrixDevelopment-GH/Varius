@@ -41,7 +41,6 @@ export class PrismaUtils {
                 },
             });
             if (user) {
-                y;
                 nwCache[id] = { lastUpdated: new Date().getTime(), value: user };
                 return nwCache[id].value;
             } else {
