@@ -12,7 +12,7 @@ import { JOB_NAMES, JobOption, REQ, SALARY, TIME } from '../../enums/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
-import { InteractionUtils, prisma } from '../../utils/index.js';
+import { InteractionUtils, prisma, PrismaUtils } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
 export class JobCommand implements Command {
@@ -89,27 +89,16 @@ export class JobCommand implements Command {
                                 if (i.values[0] == JOB_NAMES[job]) {
                                     collector.stop();
 
-                                    await prisma.job.create({
-                                        data: {
-                                            name: `${JOB_NAMES[job]}`,
-                                            salary: SALARY[job],
-                                            time: TIME[job],
-                                            required: REQ[job],
-                                            user: {
-                                                connectOrCreate: {
-                                                    where: {
-                                                        user_id: intr.user.id,
-                                                    },
-                                                    create: {
-                                                        user_id: intr.user.id,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        include: {
-                                            user: true,
-                                        },
-                                    });
+                                    let utils = new PrismaUtils();
+
+                                    await utils.registerJob(
+                                        intr.user.id, 
+                                        JOB_NAMES[job], 
+                                        TIME[job], 
+                                        SALARY[job], 
+                                        REQ[job]
+                                    );
+
                                     await InteractionUtils.send(
                                         intr,
                                         Lang.getEmbed(

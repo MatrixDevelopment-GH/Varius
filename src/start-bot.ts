@@ -11,6 +11,7 @@ import {
     DeleteAccountCommand,
     JobCommand,
     PortfolioCommand,
+    ResignCommand,
     WorkCommand,
 } from './commands/economy/index.js';
 import {
@@ -78,6 +79,7 @@ async function start(): Promise<void> {
         new PortfolioCommand(),
         new WorkCommand(),
         new JobCommand(),
+        new ResignCommand(),
 
         // Fun Commands
         new IqCommand(),

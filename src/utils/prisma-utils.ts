@@ -26,27 +26,47 @@ export class PrismaUtils {
         }
     }
 
-    public async getUser(id: string): Promise<any> {
-        if (nwCache[id] && nwCache[id].lastUpdated - new Date().getTime() < 300000) {
-            return nwCache[id].value;
-        } else {
-            let user = await prisma.user.findUnique({
-                where: {
-                    user_id: id,
+    public async registerJob(
+        userId: string, 
+        jobName: string, 
+        jobSalary: number, 
+        jobTime: number, 
+        jobReq: number
+    ): Promise<any> {
+        await prisma.job.create({
+            data: {
+                name: `${jobName}`,
+                salary: jobSalary,
+                time: jobTime,
+                required: jobReq,
+                user: {
+                    connectOrCreate: {
+                        where: {
+                            user_id: userId,
+                        },
+                        create: {
+                            user_id: userId,
+                        },
+                    },
                 },
-                include: {
-                    job: true,
-                    properties: true,
-                    stocks: true,
-                },
-            });
-            if (user) {
-                nwCache[id] = { lastUpdated: new Date().getTime(), value: user };
-                return nwCache[id].value;
-            } else {
-                return null;
+            },
+            include: {
+                user: true,
+            },
+        });
+    }
+    
+    public async deleteJob(userId: string): Promise<void> {
+        await prisma.user.update({
+            where: {
+                user_id: userId
+            },
+            data: {
+                job: {
+                    delete: true,
+                }
             }
-        }
+        })
     }
 }
 
