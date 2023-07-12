@@ -56,13 +56,12 @@ export class JobCommand implements Command {
                         .setMaxValues(1)
                         .addOptions(
                             new StringSelectMenuOptionBuilder()
-                                .setEmoji('889984011865292800')
                                 .setLabel(Lang.getRef('jobDescs.cashier', data.lang))
                                 .setValue(Lang.getRef('jobDescs.cashier', data.lang))
                         )
                         .addOptions(
                             new StringSelectMenuOptionBuilder()
-                                .setEmoji('1114545433948213288')
+                                .setEmoji("a:clean:1114545433948213288")
                                 .setLabel(Lang.getRef('jobDescs.janitor', data.lang))
                                 .setValue(Lang.getRef('jobDescs.janitor', data.lang))
                         );
@@ -94,8 +93,8 @@ export class JobCommand implements Command {
                                     await utils.registerJob(
                                         intr.user.id, 
                                         JOB_NAMES[job], 
-                                        TIME[job], 
                                         SALARY[job], 
+                                        TIME[job], 
                                         REQ[job]
                                     );
 

@@ -28,7 +28,7 @@ export class PrismaUtils {
 
     public async registerJob(
         userId: string, 
-        jobName: string, 
+        jobName: any, 
         jobSalary: number, 
         jobTime: number, 
         jobReq: number
