@@ -12,7 +12,7 @@ import { JOB_NAMES, JobOption, REQ, SALARY, TIME } from '../../enums/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
-import { InteractionUtils, prisma, PrismaUtils } from '../../utils/index.js';
+import { InteractionUtils, prisma } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
 export class JobCommand implements Command {
