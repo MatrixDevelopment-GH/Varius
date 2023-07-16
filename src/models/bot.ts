@@ -25,12 +25,54 @@ import {
     ReactionHandler,
 } from '../events/index.js';
 import { JobService, Logger } from '../services/index.js';
-import { PartialUtils } from '../utils/index.js';
+import { PartialUtils, prisma } from '../utils/index.js';
 
 const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
 let Debug = require('../../config/debug.json');
 let Logs = require('../../lang/logs.json');
+
+async function updateDatabase(): Promise<void> {
+    try {
+        // Get the current UTC time
+        const currentUTC = new Date();
+
+        // Convert UTC time to the user's local time
+        const userLocalTime = new Date(
+            currentUTC.getTime() - currentUTC.getTimezoneOffset() * 60000
+        ); // Offset the UTC time by the local timezone offset
+
+        let users = await prisma.user.findMany({ include: { job: true } });
+
+        // Check if it's midnight in the user's local time
+        if (userLocalTime.getHours() === 0 && userLocalTime.getMinutes() === 0) {
+            // Perform your database update operations using Prisma
+            // Example:
+            for (let user of users) {
+                let jobReq = user.job.requirements == null ? 0 : user.job.requirements;
+
+                await prisma.user.update({
+                    where: { id: user.id },
+                    data: {
+                        job: {
+                            update: {
+                                required: jobReq,
+                            },
+                        },
+                    },
+                });
+                console.log('success!');
+            }
+        }
+    } catch (error) {
+        console.error('Error updating the database:', error);
+    } finally {
+        await prisma.$disconnect();
+
+        // Call updateDatabase function again after a delay
+        setTimeout(updateDatabase, 24 * 60 * 60 * 1000); // 24 hours delay (86400000 milliseconds)
+    }
+}
 
 export class Bot {
     private ready = false;
@@ -90,6 +132,8 @@ export class Bot {
 
         this.ready = true;
         Logger.info(Logs.info.clientReady);
+
+        updateDatabase();
     }
 
     private onShardReady(shardId: number, _unavailableGuilds: Set<string>): void {

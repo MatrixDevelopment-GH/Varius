@@ -95,6 +95,7 @@ export class JobCommand implements Command {
                                             salary: SALARY[job],
                                             time: TIME[job],
                                             required: REQ[job],
+                                            requirements: REQ[job],
                                             user: {
                                                 connectOrCreate: {
                                                     where: {

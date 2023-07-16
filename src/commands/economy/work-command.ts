@@ -9,6 +9,7 @@ import { Command, CommandDeferType } from '../index.js';
 
 // TODO: MAKE A DYNAMIC COOLDOWN SYSTEM
 export class WorkCommand implements Command {
+    public userCooldowns: { [userId: string]: RateLimiter } = {};
     public names = [Lang.getRef('chatCommands.work', Language.Default)];
     public cooldown = new RateLimiter(1, 5000);
     public deferType = CommandDeferType.PUBLIC;
@@ -24,6 +25,12 @@ export class WorkCommand implements Command {
             },
         });
 
+        let userCooldown = this.userCooldowns[intr.user.id];
+        if (!userCooldown) {
+            userCooldown = new RateLimiter(1, user.job !== null ? user.job.time * 60 * 100 : 5000);
+            this.userCooldowns[intr.user.id] = userCooldown;
+        }
+
         let job: string;
         let salary: number;
         if (user !== null) {
@@ -33,6 +40,7 @@ export class WorkCommand implements Command {
             console.log(salary);
             console.log(user.job.required !== null ? user.job.required : 0);
             console.log(user.job.id);
+            console.log(user.job.requirements);
         } else {
             console.log('User.Job is null or undefined.');
         }
@@ -52,27 +60,19 @@ export class WorkCommand implements Command {
                 JOB: job,
                 SALARY: `${salary}`,
             });
-            let requiredReduction: number = user.job.required - 1 == 0 ? 2 : user.job.required - 1;
-            // Create a new Date object
-            let currentTime = new Date();
+            let requiredReduction: number = user.job.required - 1;
 
-            // Get the current hours and minutes
-            let hours = currentTime.getHours();
-            let minutes = currentTime.getMinutes();
-
-            // Format the time as HH:MM
-            let formattedTime =
-                hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-
-            console.log(formattedTime);
-
-            console.log(requiredReduction);
             await prisma.user.update({
                 where: {
                     user_id: intr.user.id,
                 },
                 data: {
                     balance: (user.balance += salary),
+                    job: {
+                        update: {
+                            required: requiredReduction,
+                        },
+                    },
                 },
             });
         }
