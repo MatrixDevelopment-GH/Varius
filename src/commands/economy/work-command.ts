@@ -27,7 +27,7 @@ export class WorkCommand implements Command {
 
         let userCooldown = this.userCooldowns[intr.user.id];
         if (!userCooldown) {
-            userCooldown = new RateLimiter(1, user.job !== null ? user.job.time * 60 * 100 : 5000);
+            userCooldown = new RateLimiter(1, user.job !== null ? user.job.time * 60 * 1000 : 5000);
             this.userCooldowns[intr.user.id] = userCooldown;
         }
 
@@ -36,11 +36,6 @@ export class WorkCommand implements Command {
         if (user !== null) {
             job = user.job !== null ? user.job.name : 'None';
             salary = user.job !== null ? user.job.salary : 0;
-            console.log(job);
-            console.log(salary);
-            console.log(user.job.required !== null ? user.job.required : 0);
-            console.log(user.job.id);
-            console.log(user.job.requirements);
         } else {
             console.log('User.Job is null or undefined.');
         }
@@ -56,12 +51,17 @@ export class WorkCommand implements Command {
                 ),
             });
         } else {
-            // IMPLEMENT DYNAMIC COOLDOWN SYSTEM HERE
+            let requiredReduction: number = user.job.required - 1 <= 0 ? 0 : user.job.required - 1;
+
             embed = Lang.getEmbed('displayEmbeds.work', data.lang, {
                 JOB: job,
                 SALARY: `${salary}`,
+                REMAINING_SHIFTS: `${
+                    requiredReduction == 0
+                        ? ''
+                        : `, you have ${requiredReduction} shifts left for today.`
+                }`,
             });
-            let requiredReduction: number = user.job.required - 1;
 
             await prisma.user.update({
                 where: {

@@ -226,7 +226,7 @@
             },
             "work": {
                 "title": "Work - {{JOB}}",
-                "description": "You just recieved ${{SALARY}} for working",
+                "description": "You just recieved ${{SALARY}} for working{{REMAINING_SHIFTS}}",
                 "color": "{{COM:colors.success}}"
             },
             "noJob": {
@@ -257,6 +257,10 @@
         "validationEmbeds": {
             "cooldownHit": {
                 "description": "You can only run this command {{AMOUNT}} time(s) every {{INTERVAL}}. Please wait before attempting this command again.",
+                "color": "{{COM:colors.warning}}"
+            },
+            "userCooldownHit": {
+                "description": "You can only work once every {{INTERVAL}}. Please wait before working another shift.",
                 "color": "{{COM:colors.warning}}"
             },
             "devOnly": {
