@@ -211,6 +211,10 @@
                 "description": "You have a job already! Quit from it first before re-applying!",
                 "color": "{{COM:colors.warning}}"
             },
+            "resign": {
+                "description": "You have successfully resigned from your job.",
+                "color": "{{COM:colors.success}}"
+            },
             "bet_error": {
                 "title": "You betted less than $0!",
                 "color": "{{COM:colors.warning}}"
@@ -323,7 +327,8 @@
             "create": "create",
             "work": "work",
             "job": "job",
-            "addsubMoney": "add_money"
+            "addsubMoney": "add_money",
+            "resign": "resign"
         },
         "commandDescs": {
             "help": "Find help or contact support.",
@@ -337,7 +342,8 @@
             "create": "Create a new account for yourself",
             "work": "Earn money",
             "job": "Find a job",
-            "addsubMoney": "add/take out money to someone's account (admin)"
+            "addsubMoney": "add/take out money to someone's account (admin)",
+            "resign": "Resign from a job"
         },
         "userCommands": {
             "viewDateJoined": "View Date Joined"

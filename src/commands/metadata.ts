@@ -176,6 +176,15 @@ export const ChatCommandMetadata: {
             },
         ],
     },
+    RESIGN: {
+        type: ApplicationCommandType.ChatInput,
+        name: Lang.getRef('chatCommands.resign', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('chatCommands.resign'),
+        description: Lang.getRef('commandDescs.resign', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('commandDescs.resign'),
+        dm_permission: false,
+        default_member_permissions: undefined,
+    }
 };
 
 export const MessageCommandMetadata: {

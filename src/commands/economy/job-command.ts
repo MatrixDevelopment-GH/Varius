@@ -12,7 +12,7 @@ import { JOB_NAMES, JobOption, REQ, SALARY, TIME } from '../../enums/index.js';
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
 import { Lang } from '../../services/index.js';
-import { InteractionUtils, prisma } from '../../utils/index.js';
+import { InteractionUtils, prisma, PrismaUtils } from '../../utils/index.js';
 import { Command, CommandDeferType } from '../index.js';
 
 export class JobCommand implements Command {
@@ -56,13 +56,12 @@ export class JobCommand implements Command {
                         .setMaxValues(1)
                         .addOptions(
                             new StringSelectMenuOptionBuilder()
-                                .setEmoji('889984011865292800')
                                 .setLabel(Lang.getRef('jobDescs.cashier', data.lang))
                                 .setValue(Lang.getRef('jobDescs.cashier', data.lang))
                         )
                         .addOptions(
                             new StringSelectMenuOptionBuilder()
-                                .setEmoji('1114545433948213288')
+                                .setEmoji('a:clean:1114545433948213288')
                                 .setLabel(Lang.getRef('jobDescs.janitor', data.lang))
                                 .setValue(Lang.getRef('jobDescs.janitor', data.lang))
                         );
