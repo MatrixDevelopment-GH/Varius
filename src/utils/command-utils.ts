@@ -39,8 +39,12 @@ export class CommandUtils {
         intr: CommandInteraction | MessageComponentInteraction | ModalSubmitInteraction,
         data: EventData
     ): Promise<boolean> {
-        if (command.cooldown) {
+        if (command.cooldown || command.userCooldowns) {
+            // FIX: BUG HERE
             let limited = command.cooldown.take(intr.user.id);
+            let userLimited = command.userCooldowns[intr.user.id].take(intr.user.id);
+            console.log(userLimited);
+            console.log(limited);
             if (limited) {
                 await InteractionUtils.send(
                     intr,
@@ -49,6 +53,9 @@ export class CommandUtils {
                         INTERVAL: FormatUtils.duration(command.cooldown.interval, data.lang),
                     })
                 );
+                return false;
+            } else if (userLimited) {
+                await InteractionUtils.send(intr, 'LOL CANT WORK YET BITCH');
                 return false;
             }
         }

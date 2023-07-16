@@ -9,8 +9,8 @@ import { Command, CommandDeferType } from '../index.js';
 
 // TODO: MAKE A DYNAMIC COOLDOWN SYSTEM
 export class WorkCommand implements Command {
-    public userCooldowns: { [userId: string]: RateLimiter } = {};
     public names = [Lang.getRef('chatCommands.work', Language.Default)];
+    public userCooldowns: { [userId: string]: RateLimiter } = {};
     public cooldown = new RateLimiter(1, 5000);
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = [];
@@ -56,6 +56,7 @@ export class WorkCommand implements Command {
                 ),
             });
         } else {
+            // IMPLEMENT DYNAMIC COOLDOWN SYSTEM HERE
             embed = Lang.getEmbed('displayEmbeds.work', data.lang, {
                 JOB: job,
                 SALARY: `${salary}`,

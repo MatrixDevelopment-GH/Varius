@@ -11,6 +11,7 @@ import { EventData } from '../models/internal-models.js';
 
 export interface Command {
     names: string[];
+    userCooldowns?: { [userId: string]: RateLimiter };
     cooldown?: RateLimiter;
     deferType: CommandDeferType;
     requireClientPerms: PermissionsString[];
