@@ -202,6 +202,9 @@
             "delete": {
                 "description": "account deleted."
             },
+            "deleteError": {
+                "description": "You are creating & deleting accounts too quickly! There should be at least two days before you can delete your account."
+            },
             "noBalance": {
                 "title": "No more money left!",
                 "description": "Bro u poor, u don't even have enough money for this :O, run {{WORK}} to get some cash",
@@ -260,7 +263,7 @@
                 "color": "{{COM:colors.warning}}"
             },
             "userCooldownHit": {
-                "description": "You can only work {{AMOUNT}} time(s) every {{INTERVAL}}. Please wait before working another shift.",
+                "description": "You can only work once every {{INTERVAL}}. Please wait before working another shift.",
                 "color": "{{COM:colors.warning}}"
             },
             "devOnly": {

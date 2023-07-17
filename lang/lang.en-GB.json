@@ -200,7 +200,12 @@
                 ]
             },
             "delete": {
-                "description": "account deleted."
+                "description": "account deleted.",
+                "color": "{{COM:colors.success}}"
+            },
+            "deleteError": {
+                "description": "You are creating & deleting accounts too quickly! There should be at least two days before you can delete your account.",
+                "color": "{{COM:colors.error}}"
             },
             "noBalance": {
                 "title": "No more money left!",

@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ChatInputCommandInteraction, PermissionsString } from 'discord.js';
 import { RateLimiter } from 'discord.js-rate-limiter';
+import moment from 'moment';
 
 import { Language } from '../../models/enum-helpers/index.js';
 import { EventData } from '../../models/internal-models.js';
@@ -14,22 +16,29 @@ export class DeleteAccountCommand implements Command {
     public requireClientPerms: PermissionsString[] = [];
 
     public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
-        let user = prisma.user.findUnique({
+        let user = await prisma.user.findUnique({
             where: {
-                user_id: intr.user.id
-            }
-        })
+                user_id: intr.user.id,
+            },
+        });
 
-        let embed = Lang.getEmbed('displayEmbeds.delete', data.lang).setColor("Green");
-        
+        const currentTime = moment();
+        const createdTime = moment(user.createdAt);
+
+        const differenceInDays = currentTime.diff(createdTime, 'days');
+
+        let embed = Lang.getEmbed('displayEmbeds.delete', data.lang);
+
         if (!user) {
-            embed.setDescription("404 - Account Not Found").setColor("Red");
+            embed.setDescription('404 - Account Not Found').setColor('Red');
+        } else if (differenceInDays < 2) {
+            embed = Lang.getEmbed('displayEmbeds.deleteError', data.lang);
         } else {
             await prisma.user.delete({
                 where: {
-                    user_id: intr.user.id
-                }
-            })
+                    user_id: intr.user.id,
+                },
+            });
         }
 
         await InteractionUtils.send(intr, embed);

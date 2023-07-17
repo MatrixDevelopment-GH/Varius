@@ -40,7 +40,7 @@ export class CommandUtils {
         data: EventData
     ): Promise<boolean> {
         if (command.cooldown) {
-            let limited = command.cooldown.take(intr.user.id);
+            let limited: boolean = command.cooldown.take(intr.user.id);
             if (limited) {
                 await InteractionUtils.send(
                     intr,
@@ -53,18 +53,25 @@ export class CommandUtils {
             }
         }
         if (command.userCooldowns) {
-            let userLimited = command.userCooldowns[intr.user.id ?? null];
-            if (userLimited) {
-                await InteractionUtils.send(
-                    intr,
-                    Lang.getEmbed('validationEmbeds.userCooldownHit', data.lang, {
-                        INTERVAL: FormatUtils.duration(
-                            command.userCooldowns[intr.user.id].interval,
-                            data.lang
-                        ),
-                    })
-                );
-                return false;
+            // TODO: FIX THIS PART
+            let userLimited = command.userCooldowns[intr.user.id];
+            if (Object.keys(command.userCooldowns).length !== 0) {
+                let limited = userLimited.take(intr.user.id);
+                console.log(limited);
+                if (limited == true) {
+                    console.log('yes');
+                    await InteractionUtils.send(
+                        intr,
+                        Lang.getEmbed('validationEmbeds.userCooldownHit', data.lang, {
+                            INTERVAL: FormatUtils.duration(
+                                command.userCooldowns[intr.user.id].interval,
+                                data.lang
+                            ),
+                        })
+                    );
+                    return false;
+                }
+                return;
             }
         }
 

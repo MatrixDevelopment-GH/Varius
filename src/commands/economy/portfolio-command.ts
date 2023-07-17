@@ -33,6 +33,8 @@ export class PortfolioCommand implements Command {
             },
         });
 
+        console.log(user.createdAt.getDay());
+
         if (!user) {
             await InteractionUtils.send(intr, {
                 embeds: [Lang.getEmbed('displayEmbeds.accountNotFound', data.lang)],
@@ -107,7 +109,7 @@ export class PortfolioCommand implements Command {
                     user.job == null
                         ? ''
                         : `($${user.job.salary} per ${user.job.time} ${
-                              user.job.time <= 1 ? 'hour' : 'hours'
+                              user.job.time <= 1 ? 'minute' : 'minutes'
                           })`
                 }`,
                 PROPERTY: `${
